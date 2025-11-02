@@ -5,7 +5,7 @@ class TOPSISCalculator {
   constructor(phones, weights, selectedPhones = null) {
     this.phones = selectedPhones || phones;
     this.weights = weights;
-    this.criteriaNames = ['harga', 'ram', 'memori', 'kamera', 'baterai'];
+    this.criteriaNames = ['harga', 'ram', 'memori', 'kamera', 'baterai', 'cpuGhz', 'nanometer', 'charging'];
     this.steps = [];
     this.initializeMatrix();
   }
@@ -17,7 +17,10 @@ class TOPSISCalculator {
       phone.ram,
       phone.memori,
       phone.kamera,
-      phone.baterai
+      phone.baterai,
+      phone.cpuGhz,
+      phone.nanometer,
+      phone.charging
     ]);
   }
 
@@ -105,7 +108,7 @@ class TOPSISCalculator {
     this.steps.push({
       step: 3,
       name: 'Solusi Ideal Positif dan Negatif',
-      description: 'A+ (Best) dan A- (Worst) untuk setiap kriteria',
+      description: 'A+ (Best) dan A- (Worst) untuk setiap kriteria berdasarkan tipe benefit/cost',
       idealPositive: idealPositive,
       idealNegative: idealNegative
     });
@@ -138,7 +141,7 @@ class TOPSISCalculator {
     this.steps.push({
       step: 4,
       name: 'Jarak ke Solusi Ideal',
-      description: 'Menghitung jarak Euclidean ke solusi ideal positif dan negatif',
+      description: 'Menghitung jarak Euclidean ke solusi ideal positif (D+) dan negatif (D-)',
       data: distances
     });
 
@@ -175,7 +178,7 @@ class TOPSISCalculator {
     this.steps.push({
       step: 5,
       name: 'Skor TOPSIS & Ranking',
-      description: 'Menghitung preferensi relatif dan merangking alternatif',
+      description: 'Menghitung preferensi relatif C(i) = D- / (D+ + D-) dan merangking alternatif',
       data: scores
     });
 
@@ -222,6 +225,53 @@ class TOPSISCalculator {
   // Get calculation steps for display
   getSteps() {
     return this.steps;
+  }
+
+  // Get matrix info
+  getMatrixInfo() {
+    return {
+      phones: this.phones.length,
+      criteria: this.criteriaNames.length,
+      criteriaNames: this.criteriaNames,
+      criteriaDetails: Object.keys(criteria).map(key => ({
+        key: key,
+        name: criteria[key].name,
+        type: criteria[key].type,
+        unit: criteria[key].unit
+      }))
+    };
+  }
+
+  // Validate weights
+  validateWeights() {
+    const sum = Object.values(this.weights).reduce((a, b) => a + b, 0);
+    return {
+      isValid: Math.abs(sum - 1) < 0.001,
+      sum: sum,
+      error: Math.abs(sum - 1) < 0.001 ? null : `Total bobot harus 100%, sekarang: ${(sum * 100).toFixed(1)}%`
+    };
+  }
+
+  // Generate detailed report
+  generateReport() {
+    const validation = this.validateWeights();
+    const matrixInfo = this.getMatrixInfo();
+
+    return {
+      title: 'Laporan Analisis TOPSIS - Smartphone Recommendation System',
+      timestamp: new Date().toLocaleString('id-ID'),
+      matrixInfo: matrixInfo,
+      weights: this.weights,
+      validation: validation,
+      ranking: this.scores,
+      steps: this.steps,
+      summary: {
+        topRecommendation: this.scores[0],
+        topThree: this.scores.slice(0, 3),
+        totalPhones: this.phones.length,
+        totalCriteria: this.criteriaNames.length
+      }
+    };
   }
 }
 

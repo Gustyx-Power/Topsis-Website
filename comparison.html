@@ -16,7 +16,7 @@
 <div class="bg-base-100 py-8 shadow-md">
     <div class="container mx-auto px-4">
         <h1 class="text-4xl font-bold mb-2">Perbandingan Smartphone</h1>
-        <p class="text-base-content/70">Bandingkan spesifikasi hingga 5 smartphone sekaligus</p>
+        <p class="text-base-content/70">Bandingkan spesifikasi hingga 5 smartphone sekaligus dengan ranking TOPSIS</p>
     </div>
 </div>
 
@@ -47,11 +47,22 @@
         </div>
     </div>
 
+    <!-- TOPSIS Ranking Section -->
+    <div id="rankingSection" class="hidden mb-6">
+        <div class="card bg-base-100 shadow-md">
+            <div class="card-body">
+                <h2 class="card-title mb-4">🏆 Ranking TOPSIS</h2>
+                <p class="text-sm opacity-70 mb-4">Pemenang berdasarkan analisis multi-kriteria dengan bobot default</p>
+                <div id="rankingResults"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Comparison Table -->
     <div id="comparisonResult" class="hidden">
         <div class="card bg-base-100 shadow-md">
             <div class="card-body">
-                <h2 class="card-title mb-4">Hasil Perbandingan</h2>
+                <h2 class="card-title mb-4">📊 Spesifikasi Detail</h2>
                 <div class="overflow-x-auto">
                     <table class="table table-zebra w-full" id="comparisonTable">
                         <thead>

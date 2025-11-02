@@ -8,19 +8,27 @@ const smartphoneData = [
     ram: 4,
     memori: 128,
     kamera: 13,
-    baterai: 4000,
+    baterai: 5000,
+    processor: "Unisoc T7100",
+    cpuGhz: 1.8,
+    nanometer: 28,
+    charging: 15,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
   {
     id: 2,
     alternatif: "A2",
-    nama: "Tecno Spark Go 2025 (4/64GB)",
+    nama: "Tecno Spark Go 1 (4/64GB)",
     harga: 1.05,
     ram: 4,
     memori: 64,
     kamera: 13,
     baterai: 5000,
+    processor: "Unisoc T615",
+    cpuGhz: 1.8,
+    nanometer: 12,
+    charging: 15,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -31,8 +39,12 @@ const smartphoneData = [
     harga: 1.25,
     ram: 4,
     memori: 128,
-    kamera: 13,
+    kamera: 8,
     baterai: 5000,
+    processor: "Unisoc T7250",
+    cpuGhz: 1.8,
+    nanometer: 12,
+    charging: 15,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -45,6 +57,10 @@ const smartphoneData = [
     memori: 64,
     kamera: 13,
     baterai: 5000,
+    processor: "MediaTek Helio G85",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 15,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -57,18 +73,26 @@ const smartphoneData = [
     memori: 128,
     kamera: 13,
     baterai: 5000,
+    processor: "Unisoc T612",
+    cpuGhz: 1.8,
+    nanometer: 12,
+    charging: 10,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
   {
     id: 6,
     alternatif: "A6",
-    nama: "Xiaomi Redmi 13 (6/128GB)",
-    harga: 1.8,
-    ram: 6,
+    nama: "Xiaomi Redmi 14C (8/128GB)",
+    harga: 1.7,
+    ram: 8,
     memori: 128,
     kamera: 50,
-    baterai: 5000,
+    baterai: 5160,
+    processor: "MediaTek Helio G81 Ultra",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 18,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -81,6 +105,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 50,
     baterai: 5000,
+    processor: "MediaTek Helio G99",
+    cpuGhz: 2.2,
+    nanometer: 6,
+    charging: 25,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -93,18 +121,26 @@ const smartphoneData = [
     memori: 256,
     kamera: 108,
     baterai: 5000,
+    processor: "MediaTek Helio G99",
+    cpuGhz: 2.2,
+    nanometer: 6,
+    charging: 33,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
   {
     id: 9,
     alternatif: "A9",
-    nama: "Tecno Spark 20 Pro+ (8/256GB)",
+    nama: "Tecno Spark 20 Pro (8/256GB)",
     harga: 2.5,
     ram: 8,
     memori: 256,
     kamera: 108,
     baterai: 5000,
+    processor: "MediaTek Helio G99",
+    cpuGhz: 2.2,
+    nanometer: 6,
+    charging: 33,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -117,6 +153,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 50,
     baterai: 5000,
+    processor: "MediaTek Helio G85",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 18,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -129,6 +169,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 13,
     baterai: 5000,
+    processor: "MediaTek Helio G85",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 10,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -141,6 +185,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 50,
     baterai: 5000,
+    processor: "Qualcomm Snapdragon 680 4G",
+    cpuGhz: 2.4,
+    nanometer: 6,
+    charging: 25,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -153,6 +201,10 @@ const smartphoneData = [
     memori: 256,
     kamera: 50,
     baterai: 5000,
+    processor: "MediaTek Helio G85",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 45,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -165,6 +217,10 @@ const smartphoneData = [
     memori: 256,
     kamera: 50,
     baterai: 6000,
+    processor: "MediaTek Helio G85",
+    cpuGhz: 2.0,
+    nanometer: 12,
+    charging: 44,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -177,6 +233,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 13,
     baterai: 6000,
+    processor: "MediaTek Helio G50 Ultimate",
+    cpuGhz: 2.2,
+    nanometer: 12,
+    charging: 18,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -189,6 +249,10 @@ const smartphoneData = [
     memori: 256,
     kamera: 108,
     baterai: 5000,
+    processor: "MediaTek Dimensity 6080",
+    cpuGhz: 2.4,
+    nanometer: 6,
+    charging: 33,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -201,6 +265,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 50,
     baterai: 5000,
+    processor: "MediaTek Helio G99",
+    cpuGhz: 2.2,
+    nanometer: 6,
+    charging: 25,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -213,6 +281,10 @@ const smartphoneData = [
     memori: 256,
     kamera: 108,
     baterai: 6000,
+    processor: "MediaTek Helio G99 Ultimate",
+    cpuGhz: 2.2,
+    nanometer: 6,
+    charging: 70,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -225,6 +297,10 @@ const smartphoneData = [
     memori: 128,
     kamera: 50,
     baterai: 5000,
+    processor: "Qualcomm Snapdragon 680 4G",
+    cpuGhz: 2.4,
+    nanometer: 6,
+    charging: 45,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   },
@@ -237,6 +313,10 @@ const smartphoneData = [
     memori: 256,
     kamera: 50,
     baterai: 5000,
+    processor: "MediaTek Dimensity 7025 Ultra",
+    cpuGhz: 2.5,
+    nanometer: 6,
+    charging: 45,
     kategori: "Low-End",
     rangeHarga: "Rp 1jt - 2.5jt"
   }
@@ -248,14 +328,20 @@ const criteria = {
   ram: { name: "RAM", type: "benefit", unit: "GB" },
   memori: { name: "Memori", type: "benefit", unit: "GB" },
   kamera: { name: "Kamera", type: "benefit", unit: "MP" },
-  baterai: { name: "Baterai", type: "benefit", unit: "mAh" }
+  baterai: { name: "Baterai", type: "benefit", unit: "mAh" },
+  cpuGhz: { name: "CPU Clock", type: "benefit", unit: "GHz" },
+  nanometer: { name: "Process Node", type: "cost", unit: "nm" },
+  charging: { name: "Charging", type: "benefit", unit: "W" }
 };
 
 // Bobot default (total harus 100%)
 const defaultWeights = {
-  harga: 0.30,    // 30%
-  ram: 0.25,      // 25%
-  memori: 0.20,   // 20%
-  kamera: 0.15,   // 15%
-  baterai: 0.10   // 10%
+  harga: 0.25,      // 25%
+  ram: 0.20,        // 20%
+  memori: 0.15,     // 15%
+  kamera: 0.12,     // 12%
+  baterai: 0.12,    // 12%
+  cpuGhz: 0.08,     // 8%
+  nanometer: 0.05,  // 5%
+  charging: 0.03    // 3%
 };

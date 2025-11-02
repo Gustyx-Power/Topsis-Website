@@ -1,5 +1,5 @@
-// REUSABLE UI COMPONENTS
 
+// REUSABLE UI COMPONENTS
 
 // Render Navigation Bar
 function renderNavbar() {
@@ -41,7 +41,7 @@ function renderFooter() {
       <aside>
         <p>
           <strong>Smartphone TOPSIS</strong> - Sistem Pendukung Keputusan Pemilihan Smartphone<br/>
-          Menggunakan Metode TOPSIS untuk analisis multi-kriteria
+          Menggunakan Metode TOPSIS untuk analisis multi-kriteria (8 Kriteria)
         </p>
       </aside>
       <nav class="grid grid-flow-col gap-4">
@@ -50,7 +50,7 @@ function renderFooter() {
         <a href="ranking.html" class="link link-hover">Ranking</a>
       </nav>
       <aside>
-        <p>&copy; 2025 Sistem Pendukung Keputusan | Data: Low-End, Mid-Range, Flagship</p>
+        <p>&copy; 2025 Sistem Pendukung Keputusan | Low-End Category</p>
       </aside>
     </footer>
   `;
@@ -58,49 +58,71 @@ function renderFooter() {
 
 // Render Phone Card
 function renderPhoneCard(phone) {
-  const categoryColor = getCategoryColor(phone.kategori);
+  const categoryBadgeClass = {
+    'Low-End': 'badge-secondary',
+    'Mid-Range': 'badge-accent',
+    'Flagship': 'badge-info'
+  }[phone.kategori] || 'badge-neutral';
 
   return `
     <div class="card card-compact bg-base-100 shadow-md hover:shadow-lg transition-shadow">
       <div class="card-body p-4">
         <div class="flex justify-between items-start gap-2 mb-2">
           <h3 class="card-title text-sm line-clamp-2">${phone.nama}</h3>
-          <span class="badge badge-sm ${getCategoryBadge(phone.kategori)}">${phone.kategori}</span>
+          <div class="badge ${categoryBadgeClass} badge-sm flex-shrink-0">${phone.kategori}</div>
         </div>
 
         <div class="divider my-2"></div>
 
-        <!-- Price -->
+        <!-- Price & Processor -->
         <div class="flex justify-between text-sm mb-2">
           <span class="opacity-70">Harga:</span>
           <span class="font-semibold text-primary">${formatCurrency(phone.harga)}</span>
         </div>
+        <div class="flex justify-between text-sm mb-3 text-xs">
+          <span class="opacity-70">Chip:</span>
+          <span class="font-semibold">${phone.processor}</span>
+        </div>
 
-        <!-- Specs Grid -->
-        <div class="grid grid-cols-2 gap-2 text-xs">
+        <!-- Specs Grid 2x3 -->
+        <div class="grid grid-cols-3 gap-2 text-xs">
           <div class="bg-base-200 p-2 rounded">
-            <div class="opacity-70">RAM</div>
-            <div class="font-bold text-sm">${phone.ram}GB</div>
+            <div class="opacity-70 text-xs">RAM</div>
+            <div class="font-bold">${phone.ram}GB</div>
           </div>
           <div class="bg-base-200 p-2 rounded">
-            <div class="opacity-70">Storage</div>
-            <div class="font-bold text-sm">${phone.memori}GB</div>
+            <div class="opacity-70 text-xs">Storage</div>
+            <div class="font-bold">${phone.memori}GB</div>
           </div>
           <div class="bg-base-200 p-2 rounded">
-            <div class="opacity-70">Kamera</div>
-            <div class="font-bold text-sm">${phone.kamera}MP</div>
+            <div class="opacity-70 text-xs">Kamera</div>
+            <div class="font-bold">${phone.kamera}MP</div>
           </div>
           <div class="bg-base-200 p-2 rounded">
-            <div class="opacity-70">Baterai</div>
-            <div class="font-bold text-sm">${formatNumber(phone.baterai)}mAh</div>
+            <div class="opacity-70 text-xs">Baterai</div>
+            <div class="font-bold">${formatNumber(phone.baterai)}mAh</div>
+          </div>
+          <div class="bg-base-200 p-2 rounded">
+            <div class="opacity-70 text-xs">CPU</div>
+            <div class="font-bold">${phone.cpuGhz}GHz</div>
+          </div>
+          <div class="bg-base-200 p-2 rounded">
+            <div class="opacity-70 text-xs">Charging</div>
+            <div class="font-bold">${phone.charging}W</div>
           </div>
         </div>
 
-        <div class="card-actions justify-between mt-4">
-          <button class="btn btn-sm btn-ghost" onclick="viewPhoneDetail('${phone.alternatif}')">
+        <!-- Process Node & Additional Info -->
+        <div class="flex justify-between text-xs mt-2 p-2 bg-base-200 rounded">
+          <span class="opacity-70">Process:</span>
+          <span class="font-semibold">${phone.nanometer}nm</span>
+        </div>
+
+        <div class="card-actions justify-between mt-3">
+          <button class="btn btn-ghost btn-sm" onclick="viewPhoneDetail('${phone.alternatif}')">
             Detail
           </button>
-          <button class="btn btn-sm btn-primary" onclick="addToComparison('${phone.alternatif}')">
+          <button class="btn btn-primary btn-sm" onclick="addToComparison('${phone.alternatif}')">
             + Bandingkan
           </button>
         </div>
@@ -111,6 +133,12 @@ function renderPhoneCard(phone) {
 
 // Render Phone Detail Modal
 function renderPhoneDetailModal(phone) {
+  const categoryBadgeClass = {
+    'Low-End': 'badge-secondary',
+    'Mid-Range': 'badge-accent',
+    'Flagship': 'badge-info'
+  }[phone.kategori] || 'badge-neutral';
+
   return `
     <div class="modal modal-open">
       <div class="modal-box w-11/12 max-w-2xl">
@@ -123,6 +151,18 @@ function renderPhoneDetailModal(phone) {
               <div class="flex justify-between">
                 <span class="opacity-70">Harga:</span>
                 <span class="font-semibold">${formatCurrency(phone.harga)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="opacity-70">Processor:</span>
+                <span class="font-semibold">${phone.processor}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="opacity-70">CPU Clock:</span>
+                <span class="font-semibold">${phone.cpuGhz} GHz</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="opacity-70">Process Node:</span>
+                <span class="font-semibold">${phone.nanometer} nm</span>
               </div>
               <div class="flex justify-between">
                 <span class="opacity-70">RAM:</span>
@@ -140,26 +180,34 @@ function renderPhoneDetailModal(phone) {
                 <span class="opacity-70">Baterai:</span>
                 <span class="font-semibold">${formatNumber(phone.baterai)} mAh</span>
               </div>
+              <div class="flex justify-between">
+                <span class="opacity-70">Charging:</span>
+                <span class="font-semibold">${phone.charging} W</span>
+              </div>
             </div>
           </div>
 
           <div class="bg-base-200 p-4 rounded-lg">
-            <h4 class="font-semibold mb-3">Informasi</h4>
+            <h4 class="font-semibold mb-3">Informasi Alternatif</h4>
             <div class="space-y-2 text-sm">
               <div class="flex justify-between">
-                <span class="opacity-70">Alternatif:</span>
-                <span class="font-semibold">${phone.alternatif}</span>
+                <span class="opacity-70">Kode:</span>
+                <span class="font-semibold font-mono">${phone.alternatif}</span>
               </div>
               <div class="flex justify-between">
                 <span class="opacity-70">Kategori:</span>
-                <span class="font-semibold">${phone.kategori}</span>
+                <span class="badge ${categoryBadgeClass} badge-sm">${phone.kategori}</span>
               </div>
               <div class="flex justify-between">
                 <span class="opacity-70">Range Harga:</span>
                 <span class="font-semibold">${phone.rangeHarga}</span>
               </div>
+              <div class="flex justify-between">
+                <span class="opacity-70">ID:</span>
+                <span class="font-mono">${phone.id}</span>
+              </div>
               <div class="divider my-2"></div>
-              <p class="text-xs opacity-70 italic">ID: ${phone.id}</p>
+              <p class="text-xs opacity-70 italic">Data berdasarkan GSMArena</p>
             </div>
           </div>
         </div>
@@ -183,8 +231,11 @@ function renderPhoneDetailModal(phone) {
 // Render Comparison Row
 function renderComparisonRow(criteriaKey, phones) {
   const criteriaInfo = criteria[criteriaKey];
-  let row = `<tr>
-    <td class="font-semibold bg-base-200">${criteriaInfo.name} (${criteriaInfo.unit})</td>`;
+  let row = `<tr><td class="font-semibold bg-base-200 sticky left-0 z-10">${criteriaInfo.name} (${criteriaInfo.unit})</td>`;
+
+  const values = phones.map(p => p[criteriaKey]);
+  const isBenefit = criteriaInfo.type === 'benefit';
+  const bestValue = isBenefit ? Math.max(...values) : Math.min(...values);
 
   phones.forEach(phone => {
     const value = phone[criteriaKey];
@@ -194,11 +245,20 @@ function renderComparisonRow(criteriaKey, phones) {
       displayValue = formatCurrency(value);
     } else if (criteriaKey === 'baterai') {
       displayValue = formatNumber(value);
+    } else if (criteriaKey === 'cpuGhz') {
+      displayValue = value + ' GHz';
+    } else if (criteriaKey === 'nanometer') {
+      displayValue = value + ' nm';
+    } else if (criteriaKey === 'charging') {
+      displayValue = value + ' W';
     } else {
       displayValue = value;
     }
 
-    row += `<td>${displayValue}</td>`;
+    const isBest = value === bestValue;
+    const cellClass = isBest ? 'bg-success/20 font-bold text-success' : '';
+
+    row += `<td class="text-center ${cellClass}">${displayValue}</td>`;
   });
 
   row += `</tr>`;
@@ -321,7 +381,7 @@ function renderWeightInputs(weights) {
     html += `
       <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text font-medium">${criteriaInfo.name}</span>
+          <span class="label-text font-medium">${criteriaInfo.name} (${criteriaInfo.type})</span>
           <span class="label-text-alt">
             <span id="weight-display-${key}" class="font-bold text-primary">${(weight * 100).toFixed(0)}%</span>
           </span>
@@ -377,10 +437,10 @@ function renderRankingResults(results) {
         <thead>
           <tr class="bg-base-300">
             <th>Rank</th>
-            <th>Alternatif</th>
+            <th>Alt</th>
             <th>Smartphone</th>
+            <th>Processor</th>
             <th>Harga</th>
-            <th>RAM</th>
             <th>Skor TOPSIS</th>
             <th></th>
           </tr>
@@ -396,15 +456,13 @@ function renderRankingResults(results) {
                   <span class="font-bold text-lg">${medalIcon} #${item.rank}</span>
                 </td>
                 <td class="font-mono font-semibold">${item.alternatif}</td>
-                <td class="max-w-xs">${item.nama}</td>
+                <td class="max-w-xs text-sm">${item.nama}</td>
+                <td class="text-xs">${phone.processor}</td>
                 <td>${formatCurrency(phone.harga)}</td>
-                <td>${phone.ram}GB</td>
                 <td>
                   <div class="flex items-center gap-2">
-                    <div class="progress progress-primary w-24 h-4">
-                      <div style="width: ${item.score * 100}%"></div>
-                    </div>
-                    <span class="font-bold text-primary">${(item.score * 100).toFixed(2)}%</span>
+                    <progress class="progress progress-primary w-20 h-2" value="${item.score * 100}" max="100"></progress>
+                    <span class="font-bold text-primary text-sm">${(item.score * 100).toFixed(2)}%</span>
                   </div>
                 </td>
                 <td>

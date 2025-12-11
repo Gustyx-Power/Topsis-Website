@@ -1,119 +1,281 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="corporate">
+<html lang="id" data-theme="night">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking TOPSIS - Sistem Pendukung Keputusan</title>
+
+    <!-- DaisyUI + Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="./css/styles.css">
 </head>
-<body class="bg-base-200">
-<!-- Navbar -->
-<div id="navbar"></div>
 
-<!-- Header -->
-<div class="bg-base-100 py-8 shadow-md">
-    <div class="container mx-auto px-4">
-        <h1 class="text-4xl font-bold mb-2">Ranking TOPSIS</h1>
-        <p class="text-base-content/70">Sistem pendukung keputusan dengan metode TOPSIS untuk rekomendasi smartphone terbaik</p>
-    </div>
-</div>
+<body class="bg-gradient-to-br from-base-300 via-base-200 to-base-300 min-h-screen">
+    <!-- Navbar -->
+    <div id="navbar"></div>
 
-<!-- Main Content -->
-<div class="container mx-auto px-4 py-8">
-    <!-- Configuration Section -->
-    <div class="card bg-base-100 shadow-md mb-6">
-        <div class="card-body">
-            <h2 class="card-title mb-4">Konfigurasi Kriteria & Bobot</h2>
-
-            <!-- Category Filter -->
-            <div class="form-control mb-6">
-                <label class="label">
-                    <span class="label-text font-medium text-lg">Kategori Smartphone</span>
-                </label>
-                <select id="categoryFilter" class="select select-bordered w-full md:w-64" onchange="updatePhoneList()">
-                    <option value="all">Semua Kategori</option>
-                    <option value="Low-End">Low-End (1jt - 2.5jt)</option>
-                    <option value="Mid-Range">Mid-Range (3jt - 7jt)</option>
-                    <option value="Flagship">Flagship (8jt+)</option>
-                </select>
-            </div>
-
-            <!-- Weight Inputs -->
-            <div class="divider">Atur Bobot Kriteria (Total harus 100%)</div>
-            <div id="weightInputs"></div>
-
-            <div class="card-actions justify-between mt-6">
-                <button class="btn btn-secondary" onclick="resetWeights()">Reset ke Default</button>
-                <button class="btn btn-primary" onclick="runTOPSIS()">
-                    ▶️ Jalankan Perhitungan TOPSIS
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tabs for Results -->
-    <div role="tablist" class="tabs tabs-bordered mb-6">
-        <input type="radio" name="my_tabs" role="tab" class="tab" aria-label="Hasil Ranking" />
-        <div role="tabpanel" class="tab-content p-6 bg-base-100 rounded-t-lg">
-            <div id="rankingResults"></div>
+    <!-- Header -->
+    <div class="relative overflow-hidden py-12" data-aos="fade-down">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-20 -right-20 w-60 h-60 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-secondary/20 rounded-full blur-3xl animate-pulse"
+                style="animation-delay: 1s;"></div>
         </div>
 
-        <input type="radio" name="my_tabs" role="tab" class="tab" aria-label="Langkah-Langkah Perhitungan" />
-        <div role="tabpanel" class="tab-content p-6 bg-base-100 rounded-t-lg">
-            <div id="calculationSteps" class="space-y-4"></div>
-        </div>
-
-        <input type="radio" name="my_tabs" role="tab" class="tab" aria-label="Info Kriteria" checked="checked" />
-        <div role="tabpanel" class="tab-content p-6 bg-base-100 rounded-t-lg">
-            <div class="space-y-4">
-                <div class="alert alert-info">
-                    <span>Klik tombol "Jalankan Perhitungan TOPSIS" untuk melihat hasil ranking dan langkah-langkah perhitungan</span>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex items-center gap-4 mb-4">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+                    <i class="fas fa-chart-line text-3xl text-white"></i>
                 </div>
-
-                <h3 class="text-xl font-bold mb-4">Penjelasan Kriteria & Metode TOPSIS</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="card bg-base-200">
-                        <div class="card-body">
-                            <h4 class="card-title text-base">Kriteria yang Digunakan</h4>
-                            <div class="space-y-2 text-sm">
-                                <p><strong>C1 - Harga (Jt Rp)</strong><br/>Tipe: Cost (semakin rendah semakin baik)</p>
-                                <p><strong>C2 - RAM (GB)</strong><br/>Tipe: Benefit (semakin tinggi semakin baik)</p>
-                                <p><strong>C3 - Memori (GB)</strong><br/>Tipe: Benefit (semakin tinggi semakin baik)</p>
-                                <p><strong>C4 - Kamera (MP)</strong><br/>Tipe: Benefit (semakin tinggi semakin baik)</p>
-                                <p><strong>C5 - Baterai (mAh)</strong><br/>Tipe: Benefit (semakin tinggi semakin baik)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card bg-base-200">
-                        <div class="card-body">
-                            <h4 class="card-title text-base">Metode TOPSIS</h4>
-                            <div class="space-y-2 text-sm">
-                                <p><strong>Langkah 1:</strong> Normalisasi matriks keputusan</p>
-                                <p><strong>Langkah 2:</strong> Hitung matriks ternormalisasi terbobot</p>
-                                <p><strong>Langkah 3:</strong> Tentukan solusi ideal positif & negatif</p>
-                                <p><strong>Langkah 4:</strong> Hitung jarak ke solusi ideal</p>
-                                <p><strong>Langkah 5:</strong> Hitung skor preferensi & ranking</p>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <h1
+                        class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Ranking TOPSIS
+                    </h1>
+                    <p class="text-base-content/70 mt-1">Sistem pendukung keputusan untuk rekomendasi smartphone terbaik
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Footer -->
-<div id="footer"></div>
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Configuration Section -->
+        <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5 mb-6"
+            data-aos="fade-up">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">
+                    <i class="fas fa-sliders-h text-primary"></i> Konfigurasi Kriteria & Bobot
+                </h2>
 
-<!-- Scripts -->
-<script src="./js/data.js"></script>
-<script src="./js/utils.js"></script>
-<script src="./js/topsis.js"></script>
-<script src="./js/components.js"></script>
-<script src="./js/ranking.js"></script>
+                <!-- Category Filter -->
+                <div class="form-control mb-6">
+                    <label class="label">
+                        <span class="label-text font-medium text-lg flex items-center gap-2">
+                            <i class="fas fa-layer-group text-secondary"></i> Kategori Smartphone
+                        </span>
+                    </label>
+                    <select id="categoryFilter" class="select select-bordered select-primary w-full md:w-64"
+                        onchange="updatePhoneList()">
+                        <option value="all">Semua Kategori</option>
+                        <option value="Low-End">Low-End (1jt - 2.5jt)</option>
+                        <option value="Mid-Range">Mid-Range (3jt - 7jt)</option>
+                        <option value="Flagship">Flagship (8jt+)</option>
+                    </select>
+                </div>
+
+                <!-- Weight Inputs -->
+                <div class="divider">
+                    <i class="fas fa-balance-scale text-accent"></i> Atur Bobot Kriteria (Total harus 100%)
+                </div>
+                <div id="weightInputs"></div>
+
+                <div class="card-actions justify-between mt-6 flex-wrap gap-4">
+                    <button class="btn btn-secondary gap-2" onclick="resetWeights()">
+                        <i class="fas fa-undo"></i> Reset ke Default
+                    </button>
+                    <button
+                        class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
+                        onclick="runTOPSIS()">
+                        <i class="fas fa-play"></i> Jalankan Perhitungan TOPSIS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs for Results -->
+        <div class="tabs tabs-boxed bg-base-100/80 backdrop-blur-lg p-2 rounded-2xl shadow-lg mb-6" data-aos="fade-up"
+            data-aos-delay="100">
+            <a class="tab tab-lg gap-2" id="tab-info" onclick="showTab('info')">
+                <i class="fas fa-info-circle"></i> Info Kriteria
+            </a>
+            <a class="tab tab-lg gap-2" id="tab-ranking" onclick="showTab('ranking')">
+                <i class="fas fa-trophy"></i> Hasil Ranking
+            </a>
+            <a class="tab tab-lg gap-2" id="tab-steps" onclick="showTab('steps')">
+                <i class="fas fa-list-ol"></i> Langkah Perhitungan
+            </a>
+        </div>
+
+        <!-- Tab Content: Info -->
+        <div id="content-info" class="tab-content-panel" data-aos="fade-up">
+            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+                <div class="card-body">
+                    <div class="alert alert-info shadow-lg mb-6">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                        <span>Klik tombol <strong>"Jalankan Perhitungan TOPSIS"</strong> untuk melihat hasil ranking dan
+                            langkah-langkah perhitungan</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-book text-primary"></i> Penjelasan Kriteria & Metode TOPSIS
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+                            <div class="card-body">
+                                <h4 class="card-title text-base flex items-center gap-2">
+                                    <i class="fas fa-list-check text-primary"></i> Kriteria yang Digunakan
+                                </h4>
+                                <div class="space-y-3 text-sm mt-4">
+                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <i class="fas fa-tag text-error mt-1"></i>
+                                        <div>
+                                            <strong>C1 - Harga (Jt Rp)</strong><br />
+                                            <span class="opacity-70">Tipe: Cost (semakin rendah semakin baik)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <i class="fas fa-memory text-success mt-1"></i>
+                                        <div>
+                                            <strong>C2 - RAM (GB)</strong><br />
+                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <i class="fas fa-database text-success mt-1"></i>
+                                        <div>
+                                            <strong>C3 - Memori (GB)</strong><br />
+                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <i class="fas fa-camera text-success mt-1"></i>
+                                        <div>
+                                            <strong>C4 - Kamera (MP)</strong><br />
+                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <i class="fas fa-battery-full text-success mt-1"></i>
+                                        <div>
+                                            <strong>C5 - Baterai (mAh)</strong><br />
+                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20">
+                            <div class="card-body">
+                                <h4 class="card-title text-base flex items-center gap-2">
+                                    <i class="fas fa-cogs text-secondary"></i> Metode TOPSIS
+                                </h4>
+                                <div class="space-y-3 text-sm mt-4">
+                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <div class="badge badge-primary badge-lg">1</div>
+                                        <span>Normalisasi matriks keputusan</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <div class="badge badge-primary badge-lg">2</div>
+                                        <span>Hitung matriks ternormalisasi terbobot</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <div class="badge badge-primary badge-lg">3</div>
+                                        <span>Tentukan solusi ideal positif & negatif</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <div class="badge badge-primary badge-lg">4</div>
+                                        <span>Hitung jarak ke solusi ideal</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
+                                        <div class="badge badge-primary badge-lg">5</div>
+                                        <span>Hitung skor preferensi & ranking</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Ranking -->
+        <div id="content-ranking" class="tab-content-panel hidden">
+            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+                <div class="card-body">
+                    <div id="rankingResults">
+                        <div class="text-center py-12 opacity-50">
+                            <i class="fas fa-trophy text-6xl mb-4"></i>
+                            <p class="text-xl">Jalankan perhitungan TOPSIS untuk melihat hasil ranking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Steps -->
+        <div id="content-steps" class="tab-content-panel hidden">
+            <div id="calculationSteps" class="space-y-4">
+                <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+                    <div class="card-body text-center py-12 opacity-50">
+                        <i class="fas fa-list-ol text-6xl mb-4"></i>
+                        <p class="text-xl">Jalankan perhitungan TOPSIS untuk melihat langkah-langkah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/topsis.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/ranking.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+
+        // Tab switching function
+        function showTab(tabName) {
+            // Hide all panels
+            document.querySelectorAll('.tab-content-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+
+            // Remove active from all tabs
+            document.querySelectorAll('.tabs .tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+
+            // Show selected panel and activate tab
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('tab-' + tabName).classList.add('tab-active');
+        }
+
+        // Initialize default tab
+        document.addEventListener('DOMContentLoaded', function () {
+            showTab('info');
+        });
+    </script>
 </body>
+
 </html>

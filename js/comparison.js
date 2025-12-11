@@ -4,10 +4,15 @@
 function validateComparisonData() {
     let selectedPhones = JSON.parse(localStorage.getItem('comparisonList')) || [];
 
-    // Check jika ada data yang missing field penting
-    selectedPhones = selectedPhones.filter(phone => {
-        return phone && phone.alternatif && phone.cpuGhz !== undefined &&
-               phone.nanometer !== undefined && phone.charging !== undefined;
+    // Check jika ada data yang missing field penting dan refresh dari smartphoneData
+    selectedPhones = selectedPhones.map(phone => {
+        // Try to find the current phone data by id first, then by name
+        const freshPhone = smartphoneData.find(p => p.id === phone.id) ||
+            smartphoneData.find(p => p.nama === phone.nama);
+        return freshPhone || null;
+    }).filter(phone => {
+        return phone && phone.id && phone.alternatif && phone.cpuGhz !== undefined &&
+            phone.nanometer !== undefined && phone.charging !== undefined;
     });
 
     if (selectedPhones.length === 0) {
@@ -22,7 +27,7 @@ function validateComparisonData() {
 let selectedPhones = validateComparisonData();
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     renderNavbar();
     renderFooter();
     renderPhoneSelectors();
@@ -51,8 +56,8 @@ function renderPhoneSelectors() {
                         onchange="updatePhoneSelection(${i})">
                     <option value="">Pilih Smartphone</option>
                     ${smartphoneData.map(phone => `
-                        <option value="${phone.alternatif}"
-                                ${selectedPhone && selectedPhone.alternatif === phone.alternatif ? 'selected' : ''}>
+                        <option value="${phone.id}"
+                                ${selectedPhone && selectedPhone.id === phone.id ? 'selected' : ''}>
                             ${phone.nama} (${phone.processor || 'N/A'})
                         </option>
                     `).join('')}
@@ -68,21 +73,21 @@ function renderPhoneSelectors() {
 // Update phone selection
 function updatePhoneSelection(index) {
     const select = document.getElementById(`phoneSelect${index}`);
-    const alternatif = select.value;
+    const phoneId = select.value;
 
-    if (!alternatif) {
+    if (!phoneId) {
         // Remove from selection
         if (selectedPhones[index]) {
             selectedPhones.splice(index, 1);
         }
     } else {
-        const phone = smartphoneData.find(p => p.alternatif === alternatif);
+        const phone = smartphoneData.find(p => p.id === parseInt(phoneId));
 
-        // Check duplicate
-        const isDuplicate = selectedPhones.some((p, i) => i !== index && p.alternatif === alternatif);
+        // Check duplicate using unique ID
+        const isDuplicate = selectedPhones.some((p, i) => i !== index && p.id === parseInt(phoneId));
         if (isDuplicate) {
             alert('Smartphone ini sudah dipilih!');
-            select.value = selectedPhones[index] ? selectedPhones[index].alternatif : '';
+            select.value = selectedPhones[index] ? selectedPhones[index].id : '';
             return;
         }
 
@@ -124,7 +129,7 @@ function formatComparisonValue(value, key) {
     }
 
     // Format value berdasarkan kriteria
-    switch(key) {
+    switch (key) {
         case 'harga':
             return formatCurrency(value);
         case 'baterai':
@@ -173,11 +178,12 @@ function renderComparisonRanking(scores) {
     return `
         <div class="grid grid-cols-1 md:grid-cols-${Math.min(scores.length, 3)} gap-4 mb-6">
             ${scores.slice(0, 3).map((item, index) => {
-                const phone = smartphoneData.find(p => p.alternatif === item.alternatif);
-                const medalIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
-                const medalColor = index === 0 ? 'border-yellow-400' : index === 1 ? 'border-gray-400' : 'border-orange-400';
+        // Find phone by matching alternatif AND nama to ensure correct match
+        const phone = selectedPhones.find(p => p.alternatif === item.alternatif && p.nama === item.nama);
+        const medalIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+        const medalColor = index === 0 ? 'border-yellow-400' : index === 1 ? 'border-gray-400' : 'border-orange-400';
 
-                return `
+        return `
                     <div class="card bg-gradient-to-br from-base-100 to-base-200 border-2 ${medalColor} shadow-lg">
                         <div class="card-body">
                             <div class="text-4xl text-center mb-2">${medalIcon}</div>
@@ -201,7 +207,7 @@ function renderComparisonRanking(scores) {
                         </div>
                     </div>
                 `;
-            }).join('')}
+    }).join('')}
         </div>
 
         <div class="overflow-x-auto">

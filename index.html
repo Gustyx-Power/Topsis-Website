@@ -1,115 +1,208 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="corporate">
+<html lang="id" data-theme="night">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smartphone TOPSIS - Sistem Pendukung Keputusan</title>
+
+    <!-- DaisyUI + Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="./css/styles.css">
 </head>
-<body class="bg-base-200">
-<!-- Navbar -->
-<div id="navbar"></div>
 
-<!-- Hero Section -->
-<div class="hero bg-base-100 py-12">
-    <div class="hero-content text-center">
-        <div class="max-w-2xl">
-            <h1 class="text-5xl font-bold">Smartphone Recommendation</h1>
-            <p class="py-6">Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode TOPSIS</p>
-            <p class="text-sm opacity-70">125 Smartphone • Low-End, Mid-Range, Flagship</p>
+<body class="bg-gradient-to-br from-base-300 via-base-200 to-base-300 min-h-screen">
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <div class="hero min-h-[50vh] relative overflow-hidden" data-aos="fade-up">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse"
+                style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse"
+                style="animation-delay: 2s;"></div>
         </div>
-    </div>
-</div>
 
-<!-- Filter Section -->
-<div class="container mx-auto px-4 py-8">
-    <div class="card bg-base-100 shadow-md mb-6">
-        <div class="card-body">
-            <h2 class="card-title">Filter Smartphone</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Category Filter -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-medium">Kategori</span>
-                    </label>
-                    <select id="filterCategory" class="select select-bordered w-full" onchange="applyFilters()">
-                        <option value="all">Semua Kategori</option>
-                        <option value="Low-End">Low-End (1jt - 2.5jt)</option>
-                        <option value="Mid-Range">Mid-Range (3jt - 7jt)</option>
-                        <option value="Flagship">Flagship (8jt+)</option>
-                    </select>
+        <div class="hero-content text-center relative z-10">
+            <div class="max-w-3xl">
+                <div class="mb-6" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="text-7xl animate-bounce inline-block">📱</span>
                 </div>
-
-                <!-- Search -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-medium">Cari Model</span>
-                    </label>
-                    <input type="text" id="searchInput" placeholder="Cari nama smartphone..."
-                           class="input input-bordered w-full" onkeyup="applyFilters()">
+                <h1 class="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4"
+                    data-aos="fade-up" data-aos-delay="300">
+                    Smartphone Recommendation
+                </h1>
+                <p class="py-4 text-lg md:text-xl opacity-80" data-aos="fade-up" data-aos-delay="400">
+                    Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode <span
+                        class="font-bold text-primary">TOPSIS</span>
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 mt-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="badge badge-lg badge-outline gap-2 py-3 px-4">
+                        <i class="fas fa-mobile-alt"></i> 75 Smartphone
+                    </div>
+                    <div class="badge badge-lg badge-secondary gap-2 py-3 px-4">
+                        <i class="fas fa-coins"></i> Low-End
+                    </div>
+                    <div class="badge badge-lg badge-accent gap-2 py-3 px-4">
+                        <i class="fas fa-star"></i> Mid-Range
+                    </div>
+                    <div class="badge badge-lg badge-primary gap-2 py-3 px-4">
+                        <i class="fas fa-crown"></i> Flagship
+                    </div>
                 </div>
-
-                <!-- Sort -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-medium">Urutkan</span>
-                    </label>
-                    <select id="sortBy" class="select select-bordered w-full" onchange="applyFilters()">
-                        <option value="default">Default</option>
-                        <option value="price-asc">Harga: Rendah - Tinggi</option>
-                        <option value="price-desc">Harga: Tinggi - Rendah</option>
-                        <option value="ram-desc">RAM: Tinggi - Rendah</option>
-                        <option value="battery-desc">Baterai: Tinggi - Rendah</option>
-                    </select>
+                <div class="mt-8" data-aos="fade-up" data-aos-delay="600">
+                    <a href="ranking.html"
+                        class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all">
+                        <i class="fas fa-chart-line"></i> Mulai Analisis TOPSIS
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats stats-vertical lg:stats-horizontal shadow mb-6 w-full bg-base-100">
-        <div class="stat">
-            <div class="stat-title">Total Smartphone</div>
-            <div class="stat-value text-primary" id="totalCount">125</div>
+    <!-- Filter Section -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5 mb-6"
+            data-aos="fade-up">
+            <div class="card-body">
+                <h2 class="card-title text-xl">
+                    <i class="fas fa-filter text-primary"></i> Filter Smartphone
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <!-- Category Filter -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-medium flex items-center gap-2">
+                                <i class="fas fa-layer-group text-secondary"></i> Kategori
+                            </span>
+                        </label>
+                        <select id="filterCategory" class="select select-bordered select-primary w-full"
+                            onchange="applyFilters()">
+                            <option value="all">Semua Kategori</option>
+                            <option value="Low-End">Low-End (1jt - 2.5jt)</option>
+                            <option value="Mid-Range">Mid-Range (3jt - 7jt)</option>
+                            <option value="Flagship">Flagship (8jt+)</option>
+                        </select>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-medium flex items-center gap-2">
+                                <i class="fas fa-search text-secondary"></i> Cari Model
+                            </span>
+                        </label>
+                        <input type="text" id="searchInput" placeholder="Cari nama smartphone..."
+                            class="input input-bordered input-primary w-full" onkeyup="applyFilters()">
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-medium flex items-center gap-2">
+                                <i class="fas fa-sort text-secondary"></i> Urutkan
+                            </span>
+                        </label>
+                        <select id="sortBy" class="select select-bordered select-primary w-full"
+                            onchange="applyFilters()">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Harga: Rendah - Tinggi</option>
+                            <option value="price-desc">Harga: Tinggi - Rendah</option>
+                            <option value="ram-desc">RAM: Tinggi - Rendah</option>
+                            <option value="battery-desc">Baterai: Tinggi - Rendah</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="stat">
-            <div class="stat-title">Low-End</div>
-            <div class="stat-value text-secondary" id="lowEndCount">79</div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <div
+                class="stat bg-base-100/80 backdrop-blur-lg rounded-2xl shadow-lg border border-base-content/5 hover:scale-105 transition-transform">
+                <div class="stat-figure text-primary">
+                    <i class="fas fa-mobile-alt text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Smartphone</div>
+                <div class="stat-value text-primary" id="totalCount">75</div>
+            </div>
+            <div
+                class="stat bg-base-100/80 backdrop-blur-lg rounded-2xl shadow-lg border border-base-content/5 hover:scale-105 transition-transform">
+                <div class="stat-figure text-secondary">
+                    <i class="fas fa-coins text-3xl"></i>
+                </div>
+                <div class="stat-title">Low-End</div>
+                <div class="stat-value text-secondary" id="lowEndCount">20</div>
+            </div>
+            <div
+                class="stat bg-base-100/80 backdrop-blur-lg rounded-2xl shadow-lg border border-base-content/5 hover:scale-105 transition-transform">
+                <div class="stat-figure text-accent">
+                    <i class="fas fa-star text-3xl"></i>
+                </div>
+                <div class="stat-title">Mid-Range</div>
+                <div class="stat-value text-accent" id="midRangeCount">30</div>
+            </div>
+            <div
+                class="stat bg-base-100/80 backdrop-blur-lg rounded-2xl shadow-lg border border-base-content/5 hover:scale-105 transition-transform">
+                <div class="stat-figure text-warning">
+                    <i class="fas fa-crown text-3xl"></i>
+                </div>
+                <div class="stat-title">Flagship</div>
+                <div class="stat-value text-warning" id="flagshipCount">25</div>
+            </div>
         </div>
-        <div class="stat">
-            <div class="stat-title">Mid-Range</div>
-            <div class="stat-value text-accent" id="midRangeCount">23</div>
+
+        <!-- Phone Cards Grid -->
+        <div id="phoneGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Cards will be injected here by JavaScript -->
         </div>
-        <div class="stat">
-            <div class="stat-title">Flagship</div>
-            <div class="stat-value text-info" id="flagshipCount">23</div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="text-6xl mb-4 opacity-50"><i class="fas fa-search"></i></div>
+            <p class="text-2xl opacity-50">Tidak ada smartphone yang ditemukan</p>
+            <p class="text-sm opacity-30 mt-2">Coba ubah filter atau kata kunci pencarian</p>
         </div>
+
+        <!-- Phone Detail Modal -->
+        <div id="phoneDetailModal"></div>
     </div>
 
-    <!-- Phone Cards Grid -->
-    <div id="phoneGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <!-- Cards will be injected here by JavaScript -->
-    </div>
+    <!-- Footer -->
+    <div id="footer"></div>
 
-    <!-- No Results Message -->
-    <div id="noResults" class="hidden text-center py-12">
-        <p class="text-2xl opacity-50">Tidak ada smartphone yang ditemukan</p>
-    </div>
-
-    <!-- Phone Detail Modal -->
-    <div id="phoneDetailModal"></div>
-</div>
-
-<!-- Footer -->
-<div id="footer"></div>
-
-<!-- Scripts -->
-<script src="./js/data.js"></script>
-<script src="./js/utils.js"></script>
-<script src="./js/topsis.js"></script>
-<script src="./js/components.js"></script>
-<script src="./js/app.js"></script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/topsis.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/app.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+    </script>
 </body>
+
 </html>

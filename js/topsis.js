@@ -24,23 +24,37 @@ class TOPSISCalculator {
     ]);
   }
 
-  // Step 1: Normalize the matrix
+  // Step 1: Normalize the matrix using vector normalization
   normalizeMatrix() {
     const numCriteria = this.criteriaNames.length;
+    const numAlternatives = this.phones.length;
     const normalizedMatrix = [];
 
-    for (let i = 0; i < this.phones.length; i++) {
-      normalizedMatrix[i] = [];
-
-      for (let j = 0; j < numCriteria; j++) {
-        // Calculate sum of squares for each criterion
-        let sumSquares = 0;
-        for (let k = 0; k < this.phones.length; k++) {
-          sumSquares += Math.pow(this.matrix[k][j], 2);
+    // Pre-calculate divisors for each criterion (column)
+    const divisors = [];
+    for (let j = 0; j < numCriteria; j++) {
+      let sumSquares = 0;
+      for (let i = 0; i < numAlternatives; i++) {
+        const value = this.matrix[i][j];
+        if (!isNaN(value) && isFinite(value)) {
+          sumSquares += Math.pow(value, 2);
         }
+      }
+      divisors[j] = Math.sqrt(sumSquares);
+    }
 
-        const divisor = Math.sqrt(sumSquares);
-        normalizedMatrix[i][j] = divisor !== 0 ? this.matrix[i][j] / divisor : 0;
+    // Normalize each value
+    for (let i = 0; i < numAlternatives; i++) {
+      normalizedMatrix[i] = [];
+      for (let j = 0; j < numCriteria; j++) {
+        const value = this.matrix[i][j];
+        const divisor = divisors[j];
+
+        if (divisor !== 0 && !isNaN(value) && isFinite(value)) {
+          normalizedMatrix[i][j] = value / divisor;
+        } else {
+          normalizedMatrix[i][j] = 0;
+        }
       }
     }
 
@@ -48,8 +62,15 @@ class TOPSISCalculator {
     this.steps.push({
       step: 1,
       name: 'Normalisasi Matriks',
-      description: 'Membagi setiap nilai dengan akar kuadrat jumlah kuadrat setiap kolom',
-      data: normalizedMatrix
+      description: 'Membagi setiap nilai dengan akar kuadrat jumlah kuadrat setiap kolom (Vector Normalization)',
+      data: normalizedMatrix.map((row, i) => ({
+        alternatif: this.phones[i].alternatif,
+        nama: this.phones[i].nama,
+        values: row.map((v, j) => ({
+          criteria: this.criteriaNames[j],
+          normalized: normalizeDecimal(v, 6)
+        }))
+      }))
     });
 
     return normalizedMatrix;
@@ -64,8 +85,14 @@ class TOPSISCalculator {
 
       for (let j = 0; j < this.criteriaNames.length; j++) {
         const criteriaKey = this.criteriaNames[j];
-        const weight = this.weights[criteriaKey];
-        weightedMatrix[i][j] = this.normalizedMatrix[i][j] * weight;
+        const weight = this.weights[criteriaKey] || 0;
+        const normalizedValue = this.normalizedMatrix[i][j] || 0;
+
+        let weightedValue = normalizedValue * weight;
+        if (isNaN(weightedValue) || !isFinite(weightedValue)) {
+          weightedValue = 0;
+        }
+        weightedMatrix[i][j] = weightedValue;
       }
     }
 
@@ -73,8 +100,16 @@ class TOPSISCalculator {
     this.steps.push({
       step: 2,
       name: 'Matriks Ternormalisasi Terbobot',
-      description: 'Mengalikan matriks ternormalisasi dengan bobot setiap kriteria',
-      data: weightedMatrix
+      description: 'Mengalikan matriks ternormalisasi dengan bobot setiap kriteria (V = R × W)',
+      data: weightedMatrix.map((row, i) => ({
+        alternatif: this.phones[i].alternatif,
+        nama: this.phones[i].nama,
+        values: row.map((v, j) => ({
+          criteria: this.criteriaNames[j],
+          weight: this.weights[this.criteriaNames[j]],
+          weighted: normalizeDecimal(v, 6)
+        }))
+      }))
     });
 
     return weightedMatrix;
@@ -85,21 +120,37 @@ class TOPSISCalculator {
     const numCriteria = this.criteriaNames.length;
     const idealPositive = [];
     const idealNegative = [];
+    const criteriaDetails = [];
 
     for (let j = 0; j < numCriteria; j++) {
-      const columnValues = this.weightedMatrix.map(row => row[j]);
+      // Filter out NaN and invalid values
+      const columnValues = this.weightedMatrix
+        .map(row => row[j])
+        .filter(v => !isNaN(v) && isFinite(v));
+
       const criteriaKey = this.criteriaNames[j];
       const type = criteria[criteriaKey].type;
 
-      if (type === 'benefit') {
-        // Untuk benefit: max adalah ideal positif
+      if (columnValues.length === 0) {
+        idealPositive[j] = 0;
+        idealNegative[j] = 0;
+      } else if (type === 'benefit') {
+        // Untuk benefit: max adalah ideal positif (A+), min adalah ideal negatif (A-)
         idealPositive[j] = Math.max(...columnValues);
         idealNegative[j] = Math.min(...columnValues);
       } else {
-        // Untuk cost: min adalah ideal positif
+        // Untuk cost: min adalah ideal positif (A+), max adalah ideal negatif (A-)
         idealPositive[j] = Math.min(...columnValues);
         idealNegative[j] = Math.max(...columnValues);
       }
+
+      criteriaDetails.push({
+        criteria: criteriaKey,
+        name: criteria[criteriaKey].name,
+        type: type,
+        aPlus: normalizeDecimal(idealPositive[j], 6),
+        aMinus: normalizeDecimal(idealNegative[j], 6)
+      });
     }
 
     this.idealPositive = idealPositive;
@@ -108,32 +159,54 @@ class TOPSISCalculator {
     this.steps.push({
       step: 3,
       name: 'Solusi Ideal Positif dan Negatif',
-      description: 'A+ (Best) dan A- (Worst) untuk setiap kriteria berdasarkan tipe benefit/cost',
-      idealPositive: idealPositive,
-      idealNegative: idealNegative
+      description: 'A+ (Best) dan A- (Worst) untuk setiap kriteria. Benefit: max=A+, min=A-. Cost: min=A+, max=A-.',
+      idealPositive: idealPositive.map((v, i) => ({ criteria: this.criteriaNames[i], value: normalizeDecimal(v, 6) })),
+      idealNegative: idealNegative.map((v, i) => ({ criteria: this.criteriaNames[i], value: normalizeDecimal(v, 6) })),
+      details: criteriaDetails
     });
 
     return { idealPositive, idealNegative };
   }
 
-  // Step 4: Calculate distance to ideal solutions
+  // Step 4: Calculate distance to ideal solutions (Euclidean distance)
   calculateDistances() {
     const distances = [];
 
     for (let i = 0; i < this.phones.length; i++) {
       let distancePositive = 0;
       let distanceNegative = 0;
+      const distanceDetails = [];
 
       for (let j = 0; j < this.criteriaNames.length; j++) {
-        distancePositive += Math.pow(this.weightedMatrix[i][j] - this.idealPositive[j], 2);
-        distanceNegative += Math.pow(this.weightedMatrix[i][j] - this.idealNegative[j], 2);
+        const value = this.weightedMatrix[i][j] || 0;
+        const idealPos = this.idealPositive[j] || 0;
+        const idealNeg = this.idealNegative[j] || 0;
+
+        const diffPlus = Math.pow(value - idealPos, 2);
+        const diffMinus = Math.pow(value - idealNeg, 2);
+
+        distancePositive += diffPlus;
+        distanceNegative += diffMinus;
+
+        distanceDetails.push({
+          criteria: this.criteriaNames[j],
+          value: normalizeDecimal(value, 6),
+          idealPos: normalizeDecimal(idealPos, 6),
+          idealNeg: normalizeDecimal(idealNeg, 6),
+          diffPlus: normalizeDecimal(diffPlus, 6),
+          diffMinus: normalizeDecimal(diffMinus, 6)
+        });
       }
+
+      const dPlus = Math.sqrt(distancePositive);
+      const dMinus = Math.sqrt(distanceNegative);
 
       distances[i] = {
         alternatif: this.phones[i].alternatif,
         nama: this.phones[i].nama,
-        dPlus: Math.sqrt(distancePositive),
-        dMinus: Math.sqrt(distanceNegative)
+        dPlus: isNaN(dPlus) ? 0 : dPlus,
+        dMinus: isNaN(dMinus) ? 0 : dMinus,
+        details: distanceDetails
       };
     }
 
@@ -141,45 +214,86 @@ class TOPSISCalculator {
     this.steps.push({
       step: 4,
       name: 'Jarak ke Solusi Ideal',
-      description: 'Menghitung jarak Euclidean ke solusi ideal positif (D+) dan negatif (D-)',
-      data: distances
+      description: 'Menghitung jarak Euclidean ke solusi ideal: D+ = √Σ(Vij - Aj+)² dan D- = √Σ(Vij - Aj-)²',
+      data: distances.map(d => ({
+        alternatif: d.alternatif,
+        nama: d.nama,
+        dPlus: normalizeDecimal(d.dPlus, 6),
+        dMinus: normalizeDecimal(d.dMinus, 6)
+      }))
     });
 
     return distances;
   }
 
-  // Step 5: Calculate TOPSIS scores
+  // Step 5: Calculate TOPSIS scores (relative closeness to ideal solution)
   calculateScores() {
     const scores = [];
 
     for (let i = 0; i < this.distances.length; i++) {
-      const { dPlus, dMinus } = this.distances[i];
-      const score = dMinus / (dPlus + dMinus);
+      const { dPlus, dMinus, alternatif, nama } = this.distances[i];
+      const denominator = dPlus + dMinus;
+
+      // Handle edge cases: division by zero or NaN
+      let score;
+      if (denominator === 0 || isNaN(denominator)) {
+        // If both distances are 0, it means this alternative is exactly at ideal point
+        score = dMinus > 0 ? 1 : (dPlus > 0 ? 0 : 0.5);
+      } else {
+        score = dMinus / denominator;
+      }
+
+      // Ensure score is valid and between 0 and 1
+      if (isNaN(score) || !isFinite(score)) {
+        score = 0;
+      }
+      score = Math.max(0, Math.min(1, score));
 
       scores.push({
-        alternatif: this.distances[i].alternatif,
-        nama: this.distances[i].nama,
-        dPlus: normalizeDecimal(dPlus, 4),
-        dMinus: normalizeDecimal(dMinus, 4),
-        score: normalizeDecimal(score, 4),
+        alternatif: alternatif,
+        nama: nama,
+        dPlus: normalizeDecimal(dPlus, 6),
+        dMinus: normalizeDecimal(dMinus, 6),
+        score: normalizeDecimal(score, 6),
         rank: 0 // Will be assigned after sorting
       });
     }
 
-    // Sort by score (descending)
-    scores.sort((a, b) => b.score - a.score);
+    // Sort by score (descending) - higher score = better alternative
+    scores.sort((a, b) => {
+      // Primary sort by score descending
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      // Secondary sort by dMinus descending (prefer larger distance from negative ideal)
+      if (b.dMinus !== a.dMinus) {
+        return b.dMinus - a.dMinus;
+      }
+      // Tertiary sort by dPlus ascending (prefer smaller distance from positive ideal)
+      return a.dPlus - b.dPlus;
+    });
 
-    // Assign ranks
+    // Assign ranks (handle ties)
+    let currentRank = 1;
     scores.forEach((item, index) => {
-      item.rank = index + 1;
+      if (index > 0 && item.score === scores[index - 1].score) {
+        // Same score = same rank
+        item.rank = scores[index - 1].rank;
+      } else {
+        item.rank = currentRank;
+      }
+      currentRank = index + 2; // Next potential rank
     });
 
     this.scores = scores;
     this.steps.push({
       step: 5,
       name: 'Skor TOPSIS & Ranking',
-      description: 'Menghitung preferensi relatif C(i) = D- / (D+ + D-) dan merangking alternatif',
-      data: scores
+      description: 'Menghitung preferensi relatif C(i) = D- / (D+ + D-) dan merangking alternatif. Skor mendekati 1 = lebih baik.',
+      data: scores.map(s => ({
+        ...s,
+        scorePercent: (s.score * 100).toFixed(2) + '%'
+      }))
     });
 
     return scores;

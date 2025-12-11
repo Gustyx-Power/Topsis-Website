@@ -4,7 +4,7 @@ let currentWeights = { ...defaultWeights };
 let topsisCalculator = null;
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     renderNavbar();
     renderFooter();
     initializeWeights();
@@ -121,9 +121,15 @@ function displayResults(results) {
     const rankingResults = document.getElementById('rankingResults');
     const calculationSteps = document.getElementById('calculationSteps');
 
-    // Render ranking results
+    // Get the phones that were analyzed (from the calculator)
+    const analyzedPhones = topsisCalculator.phones;
+
+    // Render ranking results - match by alternatif AND nama to ensure correct phone
     const resultsWithPhone = results.scores.map(item => {
-        const phone = smartphoneData.find(p => p.alternatif === item.alternatif);
+        // Find from the analyzed phones (filtered by category), not all smartphoneData
+        const phone = analyzedPhones.find(p =>
+            p.alternatif === item.alternatif && p.nama === item.nama
+        );
         return { ...item, ...phone };
     });
 
@@ -165,10 +171,10 @@ function renderRankingTable(results) {
                 </thead>
                 <tbody>
                     ${results.map((item, index) => {
-                        const medalIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
-                        const highlightClass = index < 3 ? 'bg-base-200' : '';
+        const medalIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
+        const highlightClass = index < 3 ? 'bg-base-200' : '';
 
-                        return `
+        return `
                             <tr class="${highlightClass}">
                                 <td class="font-bold text-lg">${medalIcon} ${item.rank}</td>
                                 <td class="font-mono font-semibold">${item.alternatif}</td>
@@ -187,7 +193,7 @@ function renderRankingTable(results) {
                                 </td>
                             </tr>
                         `;
-                    }).join('')}
+    }).join('')}
                 </tbody>
             </table>
         </div>

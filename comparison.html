@@ -1,119 +1,104 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="night">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perbandingan Smartphone - TOPSIS</title>
-
-    <!-- DaisyUI + Tailwind -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Bandingkan spesifikasi hingga 5 smartphone sekaligus dengan ranking TOPSIS">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="./css/styles.css">
+    <!-- Material Design 3 Custom CSS -->
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
-<body class="bg-gradient-to-br from-base-300 via-base-200 to-base-300 min-h-screen">
+<body>
     <!-- Navbar -->
     <div id="navbar"></div>
 
-    <!-- Header -->
-    <div class="relative overflow-hidden py-12" data-aos="fade-down">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -top-20 -right-20 w-60 h-60 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-primary/20 rounded-full blur-3xl animate-pulse"
-                style="animation-delay: 1s;"></div>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-background">
+            <div class="page-header-blob page-header-blob-1"></div>
+            <div class="page-header-blob page-header-blob-2"></div>
         </div>
 
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="flex items-center gap-4 mb-4">
-                <div
-                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg">
-                    <i class="fas fa-code-compare text-3xl text-white"></i>
+        <div class="page-header-content">
+            <div class="page-header-flex">
+                <div class="page-header-icon">
+                    <i class="fas fa-code-compare"></i>
                 </div>
                 <div>
-                    <h1
-                        class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                        Perbandingan Smartphone
-                    </h1>
-                    <p class="text-base-content/70 mt-1">Bandingkan spesifikasi hingga 5 smartphone sekaligus dengan
-                        ranking TOPSIS</p>
+                    <h1 class="page-header-title">Perbandingan Smartphone</h1>
+                    <p class="page-header-subtitle">Bandingkan spesifikasi hingga 5 smartphone sekaligus dengan ranking
+                        TOPSIS</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Selection Area -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5 mb-6"
-            data-aos="fade-up">
+    <!-- Main Content -->
+    <main class="container py-lg">
+        <!-- Selection Area -->
+        <section class="card card-elevated mb-lg" data-animate="slide-up">
             <div class="card-body">
-                <h2 class="card-title mb-4 text-xl">
-                    <i class="fas fa-hand-pointer text-accent"></i> Pilih Smartphone untuk Dibandingkan
+                <h2 class="card-title">
+                    <i class="fas fa-hand-pointer"></i>
+                    Pilih Smartphone untuk Dibandingkan
                 </h2>
 
                 <!-- Phone Selectors -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4" id="phoneSelectors">
+                <div class="selector-grid mt-md" id="phoneSelectors">
                     <!-- Phone selectors will be injected here -->
                 </div>
 
                 <!-- Selected Phones Display -->
-                <div id="selectedPhonesList" class="mb-4">
+                <div id="selectedPhonesList" class="selected-phones">
                     <!-- Selected phones will be shown here -->
                 </div>
 
-                <div class="card-actions justify-end gap-3 flex-wrap">
-                    <button id="clearBtn" class="btn btn-ghost gap-2" onclick="clearComparison()">
+                <div class="card-actions justify-end mt-lg">
+                    <button id="clearBtn" class="btn btn-ghost" onclick="clearComparison()">
                         <i class="fas fa-times"></i> Reset Pilihan
                     </button>
-                    <button id="compareBtn"
-                        class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
-                        onclick="buildComparison()">
+                    <button id="compareBtn" class="btn btn-filled btn-lg" onclick="buildComparison()">
                         <i class="fas fa-scale-balanced"></i> Bandingkan Sekarang
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- TOPSIS Ranking Section -->
-        <div id="rankingSection" class="hidden mb-6" data-aos="fade-up">
-            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+        <section id="rankingSection" class="ranking-section hidden" data-animate="slide-up">
+            <div class="card card-elevated">
                 <div class="card-body">
-                    <h2 class="card-title mb-4 text-xl">
-                        <i class="fas fa-trophy text-warning"></i> Ranking TOPSIS
+                    <h2 class="card-title">
+                        <i class="fas fa-trophy"></i>
+                        Ranking TOPSIS
                     </h2>
-                    <p class="text-sm opacity-70 mb-4">Pemenang berdasarkan analisis multi-kriteria dengan bobot default
+                    <p class="body-small text-muted mb-md">
+                        Pemenang berdasarkan analisis multi-kriteria dengan bobot default
                     </p>
                     <div id="rankingResults"></div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Comparison Table -->
-        <div id="comparisonResult" class="hidden" data-aos="fade-up">
-            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+        <section id="comparisonResult" class="hidden" data-animate="slide-up">
+            <div class="card card-elevated">
                 <div class="card-body">
-                    <h2 class="card-title mb-4 text-xl">
-                        <i class="fas fa-table text-secondary"></i> Spesifikasi Detail
+                    <h2 class="card-title">
+                        <i class="fas fa-table"></i>
+                        Spesifikasi Detail
                     </h2>
-                    <div class="overflow-x-auto">
-                        <table class="table table-zebra w-full" id="comparisonTable">
+                    <div class="table-container mt-md">
+                        <table class="table table-striped" id="comparisonTable">
                             <thead>
-                                <tr id="comparisonHeader" class="bg-base-300">
-                                    <th class="sticky left-0 z-10 bg-base-300">Spesifikasi</th>
+                                <tr id="comparisonHeader">
+                                    <th class="sticky">Spesifikasi</th>
                                 </tr>
                             </thead>
                             <tbody id="comparisonBody">
@@ -123,39 +108,31 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Empty State -->
-        <div id="emptyState" class="text-center py-16" data-aos="fade-up">
-            <div class="relative inline-block">
-                <div class="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-                <div class="relative text-8xl mb-6">
-                    <i class="fas fa-mobile-screen-button text-primary/50"></i>
-                </div>
+        <section id="emptyState" class="empty-state" data-animate="fade">
+            <div class="empty-state-icon">
+                <i class="fas fa-mobile-screen-button"></i>
             </div>
-            <p class="text-2xl font-semibold opacity-70">Pilih minimal 2 smartphone untuk membandingkan</p>
-            <p class="text-sm opacity-40 mt-2">Gunakan dropdown di atas untuk memilih smartphone</p>
-        </div>
-    </div>
+            <p class="empty-state-title">Pilih minimal 2 smartphone untuk membandingkan</p>
+            <p class="empty-state-text">Gunakan dropdown di atas untuk memilih smartphone</p>
+        </section>
+    </main>
 
     <!-- Footer -->
     <div id="footer"></div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./js/data.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/topsis.js"></script>
-    <script src="./js/components.js"></script>
+    <script src="./js/core/theme.js"></script>
+    <script src="./js/core/animations.js"></script>
+    <script src="./js/components/navbar.js"></script>
+    <script src="./js/components/footer.js"></script>
+    <script src="./js/components/modal.js"></script>
     <script src="./js/comparison.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
-    </script>
 </body>
 
 </html>

@@ -1,0 +1,220 @@
+/* ============================================
+   TABLE COMPONENTS
+   Material Design 3 Style
+   ============================================ */
+
+/* Table Container */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--md-shape-corner-large);
+    border: 1px solid var(--md-outline-variant);
+}
+
+/* Base Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--md-font-family-plain);
+    font-size: var(--md-body-medium);
+}
+
+/* Table Header */
+.table thead {
+    background: linear-gradient(135deg, var(--md-primary-container), color-mix(in srgb, var(--md-secondary-container), transparent 50%));
+}
+
+.table th {
+    padding: var(--md-spacing-md);
+    font-weight: 600;
+    font-size: var(--md-label-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-on-primary-container);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.table th:first-child {
+    border-top-left-radius: var(--md-shape-corner-large);
+}
+
+.table th:last-child {
+    border-top-right-radius: var(--md-shape-corner-large);
+}
+
+/* Table Body */
+.table tbody tr {
+    background: var(--md-surface);
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+    border-bottom: 1px solid var(--md-outline-variant);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background: color-mix(in srgb, var(--md-primary), transparent 94%);
+}
+
+.table td {
+    padding: var(--md-spacing-md);
+    color: var(--md-on-surface);
+    vertical-align: middle;
+}
+
+/* Sticky Column */
+.table .sticky {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: inherit;
+}
+
+.table thead .sticky {
+    background: var(--md-primary-container);
+}
+
+/* Striped Table */
+.table-striped tbody tr:nth-child(even) {
+    background: var(--md-surface-container);
+}
+
+.table-striped tbody tr:nth-child(even):hover {
+    background: color-mix(in srgb, var(--md-primary), transparent 90%);
+}
+
+/* Bordered Table */
+.table-bordered {
+    border: 1px solid var(--md-outline-variant);
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid var(--md-outline-variant);
+}
+
+/* Compact Table */
+.table-compact th,
+.table-compact td {
+    padding: var(--md-spacing-sm);
+    font-size: var(--md-body-small);
+}
+
+/* Highlight States */
+.table .highlight-best {
+    background: color-mix(in srgb, var(--md-success), transparent 85%);
+    color: var(--md-success);
+    font-weight: 600;
+}
+
+.table .highlight-best i {
+    color: var(--md-success);
+}
+
+.table .highlight-warning {
+    background: color-mix(in srgb, var(--md-warning), transparent 85%);
+    color: var(--md-on-warning-container);
+}
+
+.table .highlight-error {
+    background: color-mix(in srgb, var(--md-error), transparent 85%);
+    color: var(--md-error);
+}
+
+/* Ranking Table Specific */
+.table-ranking tbody tr:nth-child(1) {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--md-flagship), transparent 85%), transparent);
+}
+
+.table-ranking tbody tr:nth-child(2) {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--md-secondary), transparent 90%), transparent);
+}
+
+.table-ranking tbody tr:nth-child(3) {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--md-tertiary), transparent 90%), transparent);
+}
+
+/* Medal Cell */
+.table .medal-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+}
+
+.table .medal {
+    font-size: 20px;
+}
+
+/* Progress Cell */
+.table .progress-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+}
+
+.table .progress-bar {
+    flex: 1;
+    max-width: 100px;
+    height: 8px;
+    background: var(--md-surface-container-highest);
+    border-radius: var(--md-shape-corner-full);
+    overflow: hidden;
+}
+
+.table .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--md-primary), var(--md-primary-60));
+    border-radius: var(--md-shape-corner-full);
+    transition: width var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized);
+}
+
+.table .progress-value {
+    font-weight: 600;
+    color: var(--md-primary);
+    min-width: 60px;
+}
+
+/* Sortable Headers */
+.table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.table th.sortable:hover {
+    background: color-mix(in srgb, var(--md-on-primary-container), transparent 90%);
+}
+
+.table th.sortable::after {
+    content: '\f0dc';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 10px;
+    margin-left: var(--md-spacing-sm);
+    opacity: 0.5;
+}
+
+.table th.sortable.sort-asc::after {
+    content: '\f0de';
+    opacity: 1;
+}
+
+.table th.sortable.sort-desc::after {
+    content: '\f0dd';
+    opacity: 1;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+
+    .table th,
+    .table td {
+        padding: var(--md-spacing-sm);
+        font-size: var(--md-body-small);
+    }
+
+    .table-responsive {
+        font-size: 12px;
+    }
+}

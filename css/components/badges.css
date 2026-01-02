@@ -1,0 +1,233 @@
+/* ============================================
+   BADGE/CHIP COMPONENTS
+   Material Design 3 Style
+   ============================================ */
+
+/* Base Badge */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 12px;
+    font-family: var(--md-font-family-plain);
+    font-size: var(--md-label-small);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: var(--md-shape-corner-small);
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.badge i {
+    font-size: 10px;
+}
+
+/* Badge Sizes */
+.badge-sm {
+    padding: 2px 8px;
+    font-size: 10px;
+}
+
+.badge-lg {
+    padding: 6px 16px;
+    font-size: var(--md-label-medium);
+}
+
+/* Badge Variants */
+.badge-filled {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+}
+
+.badge-tonal {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+}
+
+.badge-outlined {
+    background: transparent;
+    border: 1px solid var(--md-outline);
+    color: var(--md-on-surface);
+}
+
+/* Category Badges */
+.badge-low-end {
+    background: var(--md-low-end-container);
+    color: var(--md-on-low-end-container);
+}
+
+.badge-mid-range {
+    background: var(--md-mid-range-container);
+    color: var(--md-on-mid-range-container);
+}
+
+.badge-flagship {
+    background: var(--md-flagship-container);
+    color: var(--md-on-flagship-container);
+}
+
+/* Semantic Badges */
+.badge-primary {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+}
+
+.badge-secondary {
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+}
+
+.badge-tertiary {
+    background: var(--md-tertiary-container);
+    color: var(--md-on-tertiary-container);
+}
+
+.badge-success {
+    background: var(--md-success-container);
+    color: var(--md-on-success-container);
+}
+
+.badge-error {
+    background: var(--md-error-container);
+    color: var(--md-on-error-container);
+}
+
+.badge-warning {
+    background: var(--md-warning-container);
+    color: var(--md-on-warning-container);
+}
+
+.badge-info {
+    background: var(--md-info-container);
+    color: var(--md-on-info-container);
+}
+
+/* Chip (Interactive Badge) */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    padding: 6px 16px;
+    font-family: var(--md-font-family-plain);
+    font-size: var(--md-label-large);
+    font-weight: 500;
+    background: var(--md-surface-container);
+    color: var(--md-on-surface-variant);
+    border: 1px solid var(--md-outline);
+    border-radius: var(--md-shape-corner-small);
+    cursor: pointer;
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+.chip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--md-on-surface);
+    opacity: 0;
+    transition: opacity var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.chip:hover::before {
+    opacity: 0.08;
+}
+
+.chip:active::before {
+    opacity: 0.12;
+}
+
+.chip:hover {
+    border-color: var(--md-on-surface-variant);
+}
+
+.chip.selected {
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+    border-color: transparent;
+}
+
+.chip i {
+    font-size: 16px;
+}
+
+/* Filter Chip */
+.chip-filter {
+    padding-left: 8px;
+}
+
+.chip-filter::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 12px;
+    opacity: 0;
+    transform: scale(0);
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.chip-filter.selected::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Input Chip (with remove button) */
+.chip-input {
+    padding-right: 8px;
+}
+
+.chip-input .chip-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--md-on-surface-variant);
+    color: var(--md-surface);
+    border-radius: 50%;
+    font-size: 10px;
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.chip-input .chip-remove:hover {
+    background: var(--md-error);
+    color: var(--md-on-error);
+}
+
+/* Pill Badge */
+.badge-pill {
+    border-radius: var(--md-shape-corner-full);
+    padding: 4px 12px;
+}
+
+/* Dot Badge (small indicator) */
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.badge-dot.badge-success {
+    background: var(--md-success);
+}
+
+.badge-dot.badge-error {
+    background: var(--md-error);
+}
+
+.badge-dot.badge-warning {
+    background: var(--md-warning);
+}
+
+/* Badge with hover effect */
+.badge-interactive {
+    cursor: pointer;
+}
+
+.badge-interactive:hover {
+    transform: scale(1.05);
+}

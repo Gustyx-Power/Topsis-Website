@@ -1,0 +1,401 @@
+/* ============================================
+   ANIMATIONS & TRANSITIONS
+   Material Design 3 Motion
+   ============================================ */
+
+/* Ripple Effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.15;
+    transform: scale(0);
+    animation: ripple-animation var(--md-motion-duration-long2) var(--md-motion-easing-standard);
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Fade Animations */
+.fade-in {
+    animation: fade-in var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.fade-out {
+    animation: fade-out var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-accelerate) forwards;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* Slide Animations */
+.slide-up {
+    animation: slide-up var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.slide-down {
+    animation: slide-down var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.slide-left {
+    animation: slide-left var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.slide-right {
+    animation: slide-right var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-right {
+    from {
+        opacity: 0;
+        transform: translateX(-24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale Animations */
+.scale-in {
+    animation: scale-in var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.scale-out {
+    animation: scale-out var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-accelerate) forwards;
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scale-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* Bounce Animation */
+.bounce {
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Pulse Animation */
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Pulse Glow */
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px color-mix(in srgb, var(--md-primary), transparent 60%);
+    }
+
+    50% {
+        box-shadow: 0 0 40px color-mix(in srgb, var(--md-primary), transparent 40%);
+    }
+}
+
+/* Float Animation */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Spin Animation */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Shake Animation */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Stagger Animations (for lists) */
+.stagger-item {
+    opacity: 0;
+    animation: slide-up var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate) forwards;
+}
+
+.stagger-item:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.stagger-item:nth-child(2) {
+    animation-delay: 50ms;
+}
+
+.stagger-item:nth-child(3) {
+    animation-delay: 100ms;
+}
+
+.stagger-item:nth-child(4) {
+    animation-delay: 150ms;
+}
+
+.stagger-item:nth-child(5) {
+    animation-delay: 200ms;
+}
+
+.stagger-item:nth-child(6) {
+    animation-delay: 250ms;
+}
+
+.stagger-item:nth-child(7) {
+    animation-delay: 300ms;
+}
+
+.stagger-item:nth-child(8) {
+    animation-delay: 350ms;
+}
+
+.stagger-item:nth-child(9) {
+    animation-delay: 400ms;
+}
+
+.stagger-item:nth-child(10) {
+    animation-delay: 450ms;
+}
+
+/* Scroll-based Animation Classes (controlled by JS) */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate),
+        transform var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized-decelerate);
+}
+
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-animate="fade"] {
+    transform: none;
+}
+
+[data-animate="slide-up"] {
+    transform: translateY(40px);
+}
+
+[data-animate="slide-down"] {
+    transform: translateY(-40px);
+}
+
+[data-animate="slide-left"] {
+    transform: translateX(40px);
+}
+
+[data-animate="slide-right"] {
+    transform: translateX(-40px);
+}
+
+[data-animate="scale"] {
+    transform: scale(0.9);
+}
+
+[data-animate].visible {
+    transform: none;
+}
+
+/* Transition Utilities */
+.transition-none {
+    transition: none;
+}
+
+.transition-all {
+    transition: all var(--md-motion-duration-medium2) var(--md-motion-easing-standard);
+}
+
+.transition-colors {
+    transition: color var(--md-motion-duration-short4) var(--md-motion-easing-standard), background-color var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.transition-opacity {
+    transition: opacity var(--md-motion-duration-medium2) var(--md-motion-easing-standard);
+}
+
+.transition-transform {
+    transition: transform var(--md-motion-duration-medium2) var(--md-motion-easing-standard);
+}
+
+/* Hover Transforms */
+.hover\:scale-102:hover {
+    transform: scale(1.02);
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+.hover\:translate-y-n2:hover {
+    transform: translateY(-2px);
+}
+
+.hover\:translate-y-n4:hover {
+    transform: translateY(-4px);
+}
+
+.hover\:translate-y-n8:hover {
+    transform: translateY(-8px);
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

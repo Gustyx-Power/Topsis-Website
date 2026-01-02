@@ -1,0 +1,318 @@
+/* ============================================
+   MATERIAL DESIGN 3 - CSS VARIABLES
+   Brown/Monet Color Scheme
+   ============================================ */
+
+:root {
+  /* ==========================================
+     PRIMARY COLORS - Brown (Coklat)
+     ========================================== */
+  --md-primary: #7F5539;
+  --md-on-primary: #FFFFFF;
+  --md-primary-container: #FFDBC8;
+  --md-on-primary-container: #2E1500;
+  
+  /* Primary Tonal Palette */
+  --md-primary-10: #2E1500;
+  --md-primary-20: #462108;
+  --md-primary-30: #5C3C24;
+  --md-primary-40: #7F5539;
+  --md-primary-50: #9A6E50;
+  --md-primary-60: #B58868;
+  --md-primary-70: #D2A280;
+  --md-primary-80: #E6BB9F;
+  --md-primary-90: #FFDBC8;
+  --md-primary-95: #FFEDE5;
+  --md-primary-99: #FFFBFF;
+
+  /* ==========================================
+     SECONDARY COLORS - Warm Brown
+     ========================================== */
+  --md-secondary: #775A47;
+  --md-on-secondary: #FFFFFF;
+  --md-secondary-container: #F5DFD0;
+  --md-on-secondary-container: #2B1609;
+  
+  /* Secondary Tonal Palette */
+  --md-secondary-10: #2B1609;
+  --md-secondary-20: #432A1C;
+  --md-secondary-30: #5C4231;
+  --md-secondary-40: #775A47;
+  --md-secondary-50: #92735F;
+  --md-secondary-60: #AE8C77;
+  --md-secondary-70: #CBA790;
+  --md-secondary-80: #E8C2AA;
+  --md-secondary-90: #F5DFD0;
+  --md-secondary-95: #FFEDE5;
+
+  /* ==========================================
+     TERTIARY COLORS - Olive/Gold
+     ========================================== */
+  --md-tertiary: #6E5F3D;
+  --md-on-tertiary: #FFFFFF;
+  --md-tertiary-container: #F7E8C2;
+  --md-on-tertiary-container: #241A00;
+  
+  /* Tertiary Tonal Palette */
+  --md-tertiary-10: #241A00;
+  --md-tertiary-20: #3C2F05;
+  --md-tertiary-30: #544726;
+  --md-tertiary-40: #6E5F3D;
+  --md-tertiary-50: #887853;
+  --md-tertiary-60: #A4926B;
+  --md-tertiary-70: #C0AC84;
+  --md-tertiary-80: #DDC89E;
+  --md-tertiary-90: #F7E8C2;
+  --md-tertiary-95: #FFF1D6;
+
+  /* ==========================================
+     ERROR COLORS
+     ========================================== */
+  --md-error: #BA1A1A;
+  --md-on-error: #FFFFFF;
+  --md-error-container: #FFDAD6;
+  --md-on-error-container: #410002;
+
+  /* ==========================================
+     SURFACE COLORS - Light Theme
+     ========================================== */
+  --md-surface: #FFF8F5;
+  --md-surface-dim: #E4D7D0;
+  --md-surface-bright: #FFF8F5;
+  --md-surface-container-lowest: #FFFFFF;
+  --md-surface-container-low: #FEF1EB;
+  --md-surface-container: #F8EBE5;
+  --md-surface-container-high: #F2E5DF;
+  --md-surface-container-highest: #EDE0D9;
+  --md-on-surface: #211A16;
+  --md-on-surface-variant: #52443C;
+  --md-outline: #85746B;
+  --md-outline-variant: #D7C3B8;
+  
+  /* ==========================================
+     INVERSE COLORS
+     ========================================== */
+  --md-inverse-surface: #382E29;
+  --md-inverse-on-surface: #FCEEEA;
+  --md-inverse-primary: #E6BB9F;
+
+  /* ==========================================
+     SEMANTIC/CATEGORY COLORS
+     ========================================== */
+  /* Low-End - Warm/Copper */
+  --md-low-end: #C77B58;
+  --md-low-end-container: #FFE6D9;
+  --md-on-low-end: #FFFFFF;
+  --md-on-low-end-container: #3D1C00;
+
+  /* Mid-Range - Medium Brown */
+  --md-mid-range: #8B6B4C;
+  --md-mid-range-container: #F5DBC2;
+  --md-on-mid-range: #FFFFFF;
+  --md-on-mid-range-container: #30180A;
+
+  /* Flagship - Gold/Amber */
+  --md-flagship: #8B6F00;
+  --md-flagship-container: #FFE08A;
+  --md-on-flagship: #FFFFFF;
+  --md-on-flagship-container: #2A2000;
+
+  /* Success */
+  --md-success: #386A20;
+  --md-success-container: #B7F397;
+  --md-on-success: #FFFFFF;
+  --md-on-success-container: #062100;
+
+  /* Info */
+  --md-info: #0061A4;
+  --md-info-container: #D1E4FF;
+  --md-on-info: #FFFFFF;
+  --md-on-info-container: #001D36;
+
+  /* Warning */
+  --md-warning: #7D5800;
+  --md-warning-container: #FFDEA6;
+  --md-on-warning: #FFFFFF;
+  --md-on-warning-container: #271900;
+
+  /* ==========================================
+     TYPOGRAPHY SCALE
+     ========================================== */
+  --md-font-family-brand: 'Outfit', sans-serif;
+  --md-font-family-plain: 'Inter', sans-serif;
+
+  /* Display */
+  --md-display-large: 57px;
+  --md-display-medium: 45px;
+  --md-display-small: 36px;
+
+  /* Headline */
+  --md-headline-large: 32px;
+  --md-headline-medium: 28px;
+  --md-headline-small: 24px;
+
+  /* Title */
+  --md-title-large: 22px;
+  --md-title-medium: 16px;
+  --md-title-small: 14px;
+
+  /* Body */
+  --md-body-large: 16px;
+  --md-body-medium: 14px;
+  --md-body-small: 12px;
+
+  /* Label */
+  --md-label-large: 14px;
+  --md-label-medium: 12px;
+  --md-label-small: 11px;
+
+  /* ==========================================
+     ELEVATION (Shadows)
+     ========================================== */
+  --md-elevation-level0: none;
+  --md-elevation-level1: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 1px 3px 1px rgba(0, 0, 0, 0.08);
+  --md-elevation-level2: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 2px 6px 2px rgba(0, 0, 0, 0.08);
+  --md-elevation-level3: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 4px 8px 3px rgba(0, 0, 0, 0.08);
+  --md-elevation-level4: 0px 2px 3px rgba(0, 0, 0, 0.1), 0px 6px 10px 4px rgba(0, 0, 0, 0.08);
+  --md-elevation-level5: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 8px 12px 6px rgba(0, 0, 0, 0.08);
+
+  /* ==========================================
+     BORDER RADIUS
+     ========================================== */
+  --md-shape-corner-none: 0px;
+  --md-shape-corner-extra-small: 4px;
+  --md-shape-corner-small: 8px;
+  --md-shape-corner-medium: 12px;
+  --md-shape-corner-large: 16px;
+  --md-shape-corner-extra-large: 28px;
+  --md-shape-corner-full: 9999px;
+
+  /* ==========================================
+     MOTION/ANIMATION
+     ========================================== */
+  --md-motion-duration-short1: 50ms;
+  --md-motion-duration-short2: 100ms;
+  --md-motion-duration-short3: 150ms;
+  --md-motion-duration-short4: 200ms;
+  --md-motion-duration-medium1: 250ms;
+  --md-motion-duration-medium2: 300ms;
+  --md-motion-duration-medium3: 350ms;
+  --md-motion-duration-medium4: 400ms;
+  --md-motion-duration-long1: 450ms;
+  --md-motion-duration-long2: 500ms;
+  --md-motion-duration-long3: 550ms;
+  --md-motion-duration-long4: 600ms;
+
+  --md-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+
+  /* ==========================================
+     SPACING
+     ========================================== */
+  --md-spacing-xs: 4px;
+  --md-spacing-sm: 8px;
+  --md-spacing-md: 16px;
+  --md-spacing-lg: 24px;
+  --md-spacing-xl: 32px;
+  --md-spacing-2xl: 48px;
+  --md-spacing-3xl: 64px;
+
+  /* ==========================================
+     Z-INDEX
+     ========================================== */
+  --md-z-index-dropdown: 1000;
+  --md-z-index-sticky: 1020;
+  --md-z-index-fixed: 1030;
+  --md-z-index-modal-backdrop: 1040;
+  --md-z-index-modal: 1050;
+  --md-z-index-tooltip: 1070;
+}
+
+/* ==========================================
+   DARK THEME
+   ========================================== */
+[data-theme="dark"] {
+  /* Primary */
+  --md-primary: #E6BB9F;
+  --md-on-primary: #3E2415;
+  --md-primary-container: #5C3C24;
+  --md-on-primary-container: #FFDBC8;
+
+  /* Secondary */
+  --md-secondary: #DDC2B0;
+  --md-on-secondary: #3D2820;
+  --md-secondary-container: #584940;
+  --md-on-secondary-container: #F5DFD0;
+
+  /* Tertiary */
+  --md-tertiary: #D4C79E;
+  --md-on-tertiary: #3A3012;
+  --md-tertiary-container: #544826;
+  --md-on-tertiary-container: #F7E8C2;
+
+  /* Error */
+  --md-error: #FFB4AB;
+  --md-on-error: #690005;
+  --md-error-container: #93000A;
+  --md-on-error-container: #FFDAD6;
+
+  /* Surface */
+  --md-surface: #1A1110;
+  --md-surface-dim: #1A1110;
+  --md-surface-bright: #423835;
+  --md-surface-container-lowest: #140C0A;
+  --md-surface-container-low: #231917;
+  --md-surface-container: #282120;
+  --md-surface-container-high: #332B29;
+  --md-surface-container-highest: #3E3634;
+  --md-on-surface: #F0DED6;
+  --md-on-surface-variant: #D7C3B8;
+  --md-outline: #9F8D84;
+  --md-outline-variant: #52443C;
+
+  /* Inverse */
+  --md-inverse-surface: #F0DED6;
+  --md-inverse-on-surface: #382E29;
+  --md-inverse-primary: #7F5539;
+
+  /* Category Colors - Dark */
+  --md-low-end: #FFB797;
+  --md-low-end-container: #793012;
+  --md-on-low-end: #5B2300;
+  --md-on-low-end-container: #FFE6D9;
+
+  --md-mid-range: #D9C09F;
+  --md-mid-range-container: #5E4530;
+  --md-on-mid-range: #3E2E1B;
+  --md-on-mid-range-container: #F5DBC2;
+
+  --md-flagship: #E5C446;
+  --md-flagship-container: #5C5000;
+  --md-on-flagship: #463B00;
+  --md-on-flagship-container: #FFE08A;
+
+  --md-success: #9CD67D;
+  --md-success-container: #1F5107;
+  --md-on-success: #0F3900;
+  --md-on-success-container: #B7F397;
+
+  --md-info: #9ECAFF;
+  --md-info-container: #004A7C;
+  --md-on-info: #003258;
+  --md-on-info-container: #D1E4FF;
+
+  --md-warning: #F8C038;
+  --md-warning-container: #5E4200;
+  --md-on-warning: #422D00;
+  --md-on-warning-container: #FFDEA6;
+
+  /* Elevation - Dark (using tonal elevation) */
+  --md-elevation-level1: 0px 1px 3px 1px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.4);
+  --md-elevation-level2: 0px 2px 6px 2px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.4);
+  --md-elevation-level3: 0px 4px 8px 3px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.4);
+  --md-elevation-level4: 0px 6px 10px 4px rgba(0, 0, 0, 0.3), 0px 2px 3px rgba(0, 0, 0, 0.4);
+  --md-elevation-level5: 0px 8px 12px 6px rgba(0, 0, 0, 0.3), 0px 4px 4px rgba(0, 0, 0, 0.4);
+}

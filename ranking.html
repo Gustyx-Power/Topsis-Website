@@ -1,80 +1,62 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="night">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking TOPSIS - Sistem Pendukung Keputusan</title>
-
-    <!-- DaisyUI + Tailwind -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description"
+        content="Sistem pendukung keputusan untuk rekomendasi smartphone terbaik menggunakan metode TOPSIS">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="./css/styles.css">
+    <!-- Material Design 3 Custom CSS -->
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
-<body class="bg-gradient-to-br from-base-300 via-base-200 to-base-300 min-h-screen">
+<body>
     <!-- Navbar -->
     <div id="navbar"></div>
 
-    <!-- Header -->
-    <div class="relative overflow-hidden py-12" data-aos="fade-down">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -top-20 -right-20 w-60 h-60 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-secondary/20 rounded-full blur-3xl animate-pulse"
-                style="animation-delay: 1s;"></div>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-background">
+            <div class="page-header-blob page-header-blob-1"></div>
+            <div class="page-header-blob page-header-blob-2"></div>
         </div>
 
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="flex items-center gap-4 mb-4">
-                <div
-                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-                    <i class="fas fa-chart-line text-3xl text-white"></i>
+        <div class="page-header-content">
+            <div class="page-header-flex">
+                <div class="page-header-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
                 <div>
-                    <h1
-                        class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Ranking TOPSIS
-                    </h1>
-                    <p class="text-base-content/70 mt-1">Sistem pendukung keputusan untuk rekomendasi smartphone terbaik
-                    </p>
+                    <h1 class="page-header-title">Ranking TOPSIS</h1>
+                    <p class="page-header-subtitle">Sistem pendukung keputusan untuk rekomendasi smartphone terbaik</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
+    <main class="container py-lg">
         <!-- Configuration Section -->
-        <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5 mb-6"
-            data-aos="fade-up">
+        <section class="card card-elevated mb-lg" data-animate="slide-up">
             <div class="card-body">
-                <h2 class="card-title text-xl mb-4">
-                    <i class="fas fa-sliders-h text-primary"></i> Konfigurasi Kriteria & Bobot
+                <h2 class="card-title mb-md">
+                    <i class="fas fa-sliders-h"></i>
+                    Konfigurasi Kriteria & Bobot
                 </h2>
 
                 <!-- Category Filter -->
-                <div class="form-control mb-6">
+                <div class="form-control mb-lg">
                     <label class="label">
-                        <span class="label-text font-medium text-lg flex items-center gap-2">
-                            <i class="fas fa-layer-group text-secondary"></i> Kategori Smartphone
+                        <span class="label-text title-small">
+                            <i class="fas fa-layer-group"></i> Kategori Smartphone
                         </span>
                     </label>
-                    <select id="categoryFilter" class="select select-bordered select-primary w-full md:w-64"
-                        onchange="updatePhoneList()">
+                    <select id="categoryFilter" class="select" style="max-width: 300px;" onchange="updatePhoneList()">
                         <option value="all">Semua Kategori</option>
                         <option value="Low-End">Low-End (1jt - 2.5jt)</option>
                         <option value="Mid-Range">Mid-Range (3jt - 7jt)</option>
@@ -84,121 +66,143 @@
 
                 <!-- Weight Inputs -->
                 <div class="divider">
-                    <i class="fas fa-balance-scale text-accent"></i> Atur Bobot Kriteria (Total harus 100%)
+                    <i class="fas fa-balance-scale"></i> Atur Bobot Kriteria (Total harus 100%)
                 </div>
-                <div id="weightInputs"></div>
+                <div id="weightInputs" class="weight-grid mt-md"></div>
 
-                <div class="card-actions justify-between mt-6 flex-wrap gap-4">
-                    <button class="btn btn-secondary gap-2" onclick="resetWeights()">
+                <div class="card-actions justify-between mt-lg">
+                    <button class="btn btn-tonal" onclick="resetWeights()">
                         <i class="fas fa-undo"></i> Reset ke Default
                     </button>
-                    <button
-                        class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
-                        onclick="runTOPSIS()">
+                    <button class="btn btn-filled btn-lg" onclick="runTOPSIS()">
                         <i class="fas fa-play"></i> Jalankan Perhitungan TOPSIS
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Tabs for Results -->
-        <div class="tabs tabs-boxed bg-base-100/80 backdrop-blur-lg p-2 rounded-2xl shadow-lg mb-6" data-aos="fade-up"
-            data-aos-delay="100">
-            <a class="tab tab-lg gap-2" id="tab-info" onclick="showTab('info')">
+        <div class="tabs mb-lg" data-animate="slide-up">
+            <button class="tab active" id="tab-info" onclick="showTab('info')">
                 <i class="fas fa-info-circle"></i> Info Kriteria
-            </a>
-            <a class="tab tab-lg gap-2" id="tab-ranking" onclick="showTab('ranking')">
+            </button>
+            <button class="tab" id="tab-ranking" onclick="showTab('ranking')">
                 <i class="fas fa-trophy"></i> Hasil Ranking
-            </a>
-            <a class="tab tab-lg gap-2" id="tab-steps" onclick="showTab('steps')">
+            </button>
+            <button class="tab" id="tab-steps" onclick="showTab('steps')">
                 <i class="fas fa-list-ol"></i> Langkah Perhitungan
-            </a>
+            </button>
         </div>
 
         <!-- Tab Content: Info -->
-        <div id="content-info" class="tab-content-panel" data-aos="fade-up">
-            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+        <section id="content-info" class="tab-panel active" data-animate="fade">
+            <div class="card card-elevated">
                 <div class="card-body">
-                    <div class="alert alert-info shadow-lg mb-6">
-                        <i class="fas fa-lightbulb text-2xl"></i>
+                    <div class="alert alert-info mb-lg">
+                        <i class="fas fa-lightbulb"></i>
                         <span>Klik tombol <strong>"Jalankan Perhitungan TOPSIS"</strong> untuk melihat hasil ranking dan
                             langkah-langkah perhitungan</span>
                     </div>
 
-                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <i class="fas fa-book text-primary"></i> Penjelasan Kriteria & Metode TOPSIS
+                    <h3 class="title-large mb-lg flex items-center gap-sm">
+                        <i class="fas fa-book text-primary"></i>
+                        Penjelasan Kriteria & Metode TOPSIS
                     </h3>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="card bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                        <!-- Criteria Info -->
+                        <div class="card card-outlined">
                             <div class="card-body">
-                                <h4 class="card-title text-base flex items-center gap-2">
-                                    <i class="fas fa-list-check text-primary"></i> Kriteria yang Digunakan
+                                <h4 class="card-title">
+                                    <i class="fas fa-list-check"></i>
+                                    Kriteria yang Digunakan
                                 </h4>
-                                <div class="space-y-3 text-sm mt-4">
-                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <i class="fas fa-tag text-error mt-1"></i>
+                                <div class="mt-md" style="display: flex; flex-direction: column; gap: 12px;">
+                                    <div class="flex items-start gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <i class="fas fa-tag text-error" style="margin-top: 4px;"></i>
                                         <div>
-                                            <strong>C1 - Harga (Jt Rp)</strong><br />
-                                            <span class="opacity-70">Tipe: Cost (semakin rendah semakin baik)</span>
+                                            <strong>C1 - Harga (Jt Rp)</strong><br>
+                                            <span class="text-muted body-small">Tipe: Cost (semakin rendah semakin
+                                                baik)</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <i class="fas fa-memory text-success mt-1"></i>
+                                    <div class="flex items-start gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <i class="fas fa-memory text-success" style="margin-top: 4px;"></i>
                                         <div>
-                                            <strong>C2 - RAM (GB)</strong><br />
-                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                            <strong>C2 - RAM (GB)</strong><br>
+                                            <span class="text-muted body-small">Tipe: Benefit (semakin tinggi semakin
+                                                baik)</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <i class="fas fa-database text-success mt-1"></i>
+                                    <div class="flex items-start gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <i class="fas fa-database text-success" style="margin-top: 4px;"></i>
                                         <div>
-                                            <strong>C3 - Memori (GB)</strong><br />
-                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                            <strong>C3 - Memori (GB)</strong><br>
+                                            <span class="text-muted body-small">Tipe: Benefit (semakin tinggi semakin
+                                                baik)</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <i class="fas fa-camera text-success mt-1"></i>
+                                    <div class="flex items-start gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <i class="fas fa-camera text-success" style="margin-top: 4px;"></i>
                                         <div>
-                                            <strong>C4 - Kamera (MP)</strong><br />
-                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                            <strong>C4 - Kamera (MP)</strong><br>
+                                            <span class="text-muted body-small">Tipe: Benefit (semakin tinggi semakin
+                                                baik)</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-start gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <i class="fas fa-battery-full text-success mt-1"></i>
+                                    <div class="flex items-start gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <i class="fas fa-battery-full text-success" style="margin-top: 4px;"></i>
                                         <div>
-                                            <strong>C5 - Baterai (mAh)</strong><br />
-                                            <span class="opacity-70">Tipe: Benefit (semakin tinggi semakin baik)</span>
+                                            <strong>C5 - Baterai (mAh)</strong><br>
+                                            <span class="text-muted body-small">Tipe: Benefit (semakin tinggi semakin
+                                                baik)</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20">
+                        <!-- TOPSIS Method -->
+                        <div class="card card-outlined">
                             <div class="card-body">
-                                <h4 class="card-title text-base flex items-center gap-2">
-                                    <i class="fas fa-cogs text-secondary"></i> Metode TOPSIS
+                                <h4 class="card-title">
+                                    <i class="fas fa-cogs"></i>
+                                    Metode TOPSIS
                                 </h4>
-                                <div class="space-y-3 text-sm mt-4">
-                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <div class="badge badge-primary badge-lg">1</div>
+                                <div class="mt-md" style="display: flex; flex-direction: column; gap: 12px;">
+                                    <div class="flex items-center gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <span class="badge badge-primary"
+                                            style="min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">1</span>
                                         <span>Normalisasi matriks keputusan</span>
                                     </div>
-                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <div class="badge badge-primary badge-lg">2</div>
+                                    <div class="flex items-center gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <span class="badge badge-primary"
+                                            style="min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">2</span>
                                         <span>Hitung matriks ternormalisasi terbobot</span>
                                     </div>
-                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <div class="badge badge-primary badge-lg">3</div>
+                                    <div class="flex items-center gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <span class="badge badge-primary"
+                                            style="min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">3</span>
                                         <span>Tentukan solusi ideal positif & negatif</span>
                                     </div>
-                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <div class="badge badge-primary badge-lg">4</div>
+                                    <div class="flex items-center gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <span class="badge badge-primary"
+                                            style="min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">4</span>
                                         <span>Hitung jarak ke solusi ideal</span>
                                     </div>
-                                    <div class="flex items-center gap-3 p-3 bg-base-100/50 rounded-lg">
-                                        <div class="badge badge-primary badge-lg">5</div>
+                                    <div class="flex items-center gap-sm p-sm"
+                                        style="background: var(--md-surface-container); border-radius: var(--md-shape-corner-medium);">
+                                        <span class="badge badge-primary"
+                                            style="min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">5</span>
                                         <span>Hitung skor preferensi & ranking</span>
                                     </div>
                                 </div>
@@ -207,68 +211,72 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Tab Content: Ranking -->
-        <div id="content-ranking" class="tab-content-panel hidden">
-            <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
+        <section id="content-ranking" class="tab-panel hidden">
+            <div class="card card-elevated">
                 <div class="card-body">
                     <div id="rankingResults">
-                        <div class="text-center py-12 opacity-50">
-                            <i class="fas fa-trophy text-6xl mb-4"></i>
-                            <p class="text-xl">Jalankan perhitungan TOPSIS untuk melihat hasil ranking</p>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <p class="empty-state-title">Jalankan perhitungan TOPSIS untuk melihat hasil ranking</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Tab Content: Steps -->
-        <div id="content-steps" class="tab-content-panel hidden">
-            <div id="calculationSteps" class="space-y-4">
-                <div class="card bg-base-100/80 backdrop-blur-lg shadow-xl border border-base-content/5">
-                    <div class="card-body text-center py-12 opacity-50">
-                        <i class="fas fa-list-ol text-6xl mb-4"></i>
-                        <p class="text-xl">Jalankan perhitungan TOPSIS untuk melihat langkah-langkah</p>
+        <section id="content-steps" class="tab-panel hidden">
+            <div id="calculationSteps">
+                <div class="card card-elevated">
+                    <div class="card-body">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <p class="empty-state-title">Jalankan perhitungan TOPSIS untuk melihat langkah-langkah</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <div id="footer"></div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./js/data.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/topsis.js"></script>
-    <script src="./js/components.js"></script>
+    <script src="./js/core/theme.js"></script>
+    <script src="./js/core/animations.js"></script>
+    <script src="./js/components/navbar.js"></script>
+    <script src="./js/components/footer.js"></script>
+    <script src="./js/components/modal.js"></script>
     <script src="./js/ranking.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
-
         // Tab switching function
         function showTab(tabName) {
             // Hide all panels
-            document.querySelectorAll('.tab-content-panel').forEach(panel => {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.add('hidden');
+                panel.classList.remove('active');
             });
 
             // Remove active from all tabs
             document.querySelectorAll('.tabs .tab').forEach(tab => {
-                tab.classList.remove('tab-active');
+                tab.classList.remove('active');
             });
 
             // Show selected panel and activate tab
             document.getElementById('content-' + tabName).classList.remove('hidden');
-            document.getElementById('tab-' + tabName).classList.add('tab-active');
+            document.getElementById('content-' + tabName).classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
         }
 
         // Initialize default tab

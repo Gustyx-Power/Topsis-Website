@@ -1,0 +1,128 @@
+/* ============================================
+   FOOTER COMPONENT
+   Material Design 3 Style
+   ============================================ */
+
+.footer {
+    margin-top: auto;
+    padding: var(--md-spacing-2xl) var(--md-spacing-md);
+    background: linear-gradient(135deg, var(--md-surface-container), var(--md-surface-container-high));
+    border-top: 1px solid var(--md-outline-variant);
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--md-spacing-lg);
+}
+
+/* Footer Brand */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+}
+
+.footer-brand-icon {
+    font-size: 32px;
+}
+
+.footer-brand-text {
+    font-family: var(--md-font-family-brand);
+    font-size: var(--md-title-large);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--md-primary), var(--md-tertiary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Footer Description */
+.footer-description {
+    text-align: center;
+    color: var(--md-on-surface-variant);
+    font-size: var(--md-body-medium);
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* Footer Navigation */
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--md-spacing-lg);
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    color: var(--md-on-surface-variant);
+    font-size: var(--md-label-large);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.footer-link:hover {
+    color: var(--md-primary);
+}
+
+.footer-link i {
+    font-size: 16px;
+    transition: transform var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.footer-link:hover i {
+    transform: translateY(-2px);
+}
+
+/* Footer Divider */
+.footer-divider {
+    width: 100%;
+    max-width: 400px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--md-outline-variant), transparent);
+}
+
+/* Footer Copyright */
+.footer-copyright {
+    font-size: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+    opacity: 0.7;
+    text-align: center;
+}
+
+/* Footer with gradient border */
+.footer-accent {
+    position: relative;
+}
+
+.footer-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary), var(--md-primary));
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .footer {
+        padding: var(--md-spacing-xl) var(--md-spacing-md);
+    }
+
+    .footer-nav {
+        gap: var(--md-spacing-md);
+    }
+
+    .footer-description {
+        font-size: var(--md-body-small);
+    }
+}

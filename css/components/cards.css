@@ -1,0 +1,374 @@
+/* ============================================
+   CARD COMPONENTS
+   Material Design 3 Style
+   ============================================ */
+
+/* Base Card */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--md-surface-container);
+    border-radius: var(--md-shape-corner-large);
+    overflow: hidden;
+    transition: all var(--md-motion-duration-medium2) var(--md-motion-easing-standard);
+}
+
+/* Card Variants */
+.card-elevated {
+    background: var(--md-surface-container-low);
+    box-shadow: var(--md-elevation-level1);
+}
+
+.card-elevated:hover {
+    box-shadow: var(--md-elevation-level3);
+    transform: translateY(-4px);
+}
+
+.card-filled {
+    background: var(--md-surface-container-highest);
+}
+
+.card-filled:hover {
+    background: color-mix(in srgb, var(--md-surface-container-highest), var(--md-on-surface) 5%);
+}
+
+.card-outlined {
+    background: var(--md-surface);
+    border: 1px solid var(--md-outline-variant);
+}
+
+.card-outlined:hover {
+    border-color: var(--md-outline);
+}
+
+/* Card Body */
+.card-body {
+    padding: var(--md-spacing-md);
+}
+
+.card-body-sm {
+    padding: var(--md-spacing-sm);
+}
+
+.card-body-lg {
+    padding: var(--md-spacing-lg);
+}
+
+/* Card Header/Title */
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    font-family: var(--md-font-family-brand);
+    font-size: var(--md-title-medium);
+    font-weight: 600;
+    color: var(--md-on-surface);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.card-title i {
+    color: var(--md-primary);
+}
+
+/* Card Content */
+.card-content {
+    flex: 1;
+    color: var(--md-on-surface-variant);
+}
+
+/* Card Actions */
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    padding-top: var(--md-spacing-md);
+    border-top: 1px solid var(--md-outline-variant);
+    margin-top: auto;
+}
+
+.card-actions.justify-end {
+    justify-content: flex-end;
+}
+
+.card-actions.justify-between {
+    justify-content: space-between;
+}
+
+/* Phone Card - Special styling */
+.phone-card {
+    background: var(--md-surface-container);
+    border: 1px solid var(--md-outline-variant);
+    overflow: hidden;
+    transition: all var(--md-motion-duration-medium2) var(--md-motion-easing-emphasized);
+}
+
+.phone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary));
+    opacity: 0;
+    transition: opacity var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.phone-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--md-elevation-level3);
+    border-color: var(--md-primary);
+}
+
+.phone-card:hover::before {
+    opacity: 1;
+}
+
+/* Phone Card Header */
+.phone-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--md-spacing-sm);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.phone-card-name {
+    font-family: var(--md-font-family-brand);
+    font-size: var(--md-title-small);
+    font-weight: 600;
+    color: var(--md-on-surface);
+    transition: color var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.phone-card:hover .phone-card-name {
+    color: var(--md-primary);
+}
+
+/* Phone Card Price Box */
+.phone-card-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--md-spacing-sm) var(--md-spacing-md);
+    background: linear-gradient(135deg, var(--md-primary-container), color-mix(in srgb, var(--md-tertiary-container), transparent 50%));
+    border-radius: var(--md-shape-corner-medium);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.phone-card-price-label {
+    font-size: var(--md-body-small);
+    color: var(--md-on-primary-container);
+    opacity: 0.8;
+}
+
+.phone-card-price-label i {
+    margin-right: var(--md-spacing-xs);
+}
+
+.phone-card-price-value {
+    font-family: var(--md-font-family-brand);
+    font-size: var(--md-title-medium);
+    font-weight: 700;
+    color: var(--md-primary);
+}
+
+/* Phone Card Processor */
+.phone-card-processor {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    padding: var(--md-spacing-sm);
+    background: var(--md-surface-container-high);
+    border-radius: var(--md-shape-corner-small);
+    margin-bottom: var(--md-spacing-sm);
+    font-size: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+}
+
+.phone-card-processor i {
+    color: var(--md-secondary);
+}
+
+/* Phone Card Spec Grid */
+.phone-card-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--md-spacing-sm);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.phone-card-spec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--md-spacing-sm);
+    background: var(--md-surface-container-high);
+    border-radius: var(--md-shape-corner-medium);
+    text-align: center;
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.phone-card-spec:hover {
+    background: var(--md-surface-container-highest);
+    transform: scale(1.02);
+}
+
+.phone-card-spec-icon {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.phone-card-spec-icon.ram {
+    color: var(--md-secondary);
+}
+
+.phone-card-spec-icon.storage {
+    color: var(--md-tertiary);
+}
+
+.phone-card-spec-icon.camera {
+    color: var(--md-info);
+}
+
+.phone-card-spec-icon.battery {
+    color: var(--md-success);
+}
+
+.phone-card-spec-icon.charging {
+    color: var(--md-warning);
+}
+
+.phone-card-spec-icon.cpu {
+    color: var(--md-error);
+}
+
+.phone-card-spec-value {
+    font-size: var(--md-body-small);
+    font-weight: 700;
+    color: var(--md-on-surface);
+}
+
+.phone-card-spec-label {
+    font-size: 10px;
+    color: var(--md-on-surface-variant);
+    opacity: 0.7;
+}
+
+/* Phone Card Process Node */
+.phone-card-node {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--md-spacing-sm);
+    background: linear-gradient(90deg, var(--md-surface-container-high), transparent);
+    border-radius: var(--md-shape-corner-small);
+    font-size: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+}
+
+.phone-card-node-value {
+    font-weight: 600;
+    color: var(--md-on-surface);
+}
+
+/* Stat Card */
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--md-spacing-md);
+    background: var(--md-surface-container);
+    border-radius: var(--md-shape-corner-large);
+    border: 1px solid var(--md-outline-variant);
+    transition: all var(--md-motion-duration-short4) var(--md-motion-easing-standard);
+}
+
+.stat-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--md-elevation-level2);
+    border-color: var(--md-primary);
+}
+
+.stat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.stat-card-icon {
+    font-size: 28px;
+}
+
+.stat-card-icon.primary {
+    color: var(--md-primary);
+}
+
+.stat-card-icon.secondary {
+    color: var(--md-secondary);
+}
+
+.stat-card-icon.tertiary {
+    color: var(--md-tertiary);
+}
+
+.stat-card-icon.success {
+    color: var(--md-success);
+}
+
+.stat-card-icon.warning {
+    color: var(--md-warning);
+}
+
+.stat-card-title {
+    font-size: var(--md-label-medium);
+    font-weight: 500;
+    color: var(--md-on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card-value {
+    font-family: var(--md-font-family-brand);
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.stat-card-value.primary {
+    color: var(--md-primary);
+}
+
+.stat-card-value.secondary {
+    color: var(--md-secondary);
+}
+
+.stat-card-value.tertiary {
+    color: var(--md-tertiary);
+}
+
+.stat-card-value.success {
+    color: var(--md-success);
+}
+
+.stat-card-value.warning {
+    color: var(--md-warning);
+}
+
+/* Glass Card Effect */
+.card-glass {
+    background: linear-gradient(135deg,
+            color-mix(in srgb, var(--md-surface-container) 80%, transparent),
+            color-mix(in srgb, var(--md-surface-container-high) 60%, transparent));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid color-mix(in srgb, var(--md-outline-variant), transparent 50%);
+}
+
+/* Card with gradient accent */
+.card-accent {
+    border-top: 4px solid transparent;
+    border-image: linear-gradient(90deg, var(--md-primary), var(--md-tertiary)) 1;
+}

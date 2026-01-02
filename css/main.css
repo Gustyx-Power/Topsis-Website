@@ -1,0 +1,366 @@
+/* ============================================
+   MAIN CSS - MATERIAL DESIGN 3 THEME
+   Smartphone TOPSIS - Decision Support System
+   ============================================ */
+
+/* Base Styles */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+
+/* Layout */
+@import url('./layouts/grid.css');
+
+/* Components */
+@import url('./components/navbar.css');
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/forms.css');
+@import url('./components/badges.css');
+@import url('./components/tables.css');
+@import url('./components/modals.css');
+@import url('./components/footer.css');
+@import url('./components/hero.css');
+@import url('./components/misc.css');
+
+/* Utilities */
+@import url('./utilities/animations.css');
+
+/* ============================================
+   ADDITIONAL PAGE-SPECIFIC STYLES
+   ============================================ */
+
+/* Filter Section */
+.filter-section {
+    margin-bottom: var(--md-spacing-lg);
+}
+
+.filter-card {
+    padding: var(--md-spacing-lg);
+    background: var(--md-surface-container);
+    border-radius: var(--md-shape-corner-large);
+    border: 1px solid var(--md-outline-variant);
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--md-spacing-md);
+}
+
+@media (min-width: 768px) {
+    .filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Stats Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--md-spacing-md);
+    margin-bottom: var(--md-spacing-xl);
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Phone Grid */
+.phone-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--md-spacing-lg);
+}
+
+@media (min-width: 640px) {
+    .phone-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .phone-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .phone-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* No Results State */
+.no-results {
+    text-align: center;
+    padding: var(--md-spacing-3xl) var(--md-spacing-md);
+}
+
+.no-results-icon {
+    font-size: 72px;
+    color: var(--md-on-surface-variant);
+    opacity: 0.3;
+    margin-bottom: var(--md-spacing-md);
+}
+
+.no-results-title {
+    font-size: var(--md-title-large);
+    color: var(--md-on-surface-variant);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.no-results-text {
+    font-size: var(--md-body-medium);
+    color: var(--md-on-surface-variant);
+    opacity: 0.6;
+}
+
+/* Weight Configuration Section */
+.weight-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--md-spacing-md);
+}
+
+@media (min-width: 768px) {
+    .weight-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.weight-item {
+    padding: var(--md-spacing-md);
+    background: var(--md-surface-container-high);
+    border-radius: var(--md-shape-corner-large);
+    border: 1px solid var(--md-outline-variant);
+}
+
+.weight-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.weight-label {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+.weight-label i {
+    color: var(--md-primary);
+}
+
+.weight-value {
+    font-family: var(--md-font-family-brand);
+    font-size: var(--md-title-medium);
+    font-weight: 700;
+    color: var(--md-primary);
+}
+
+.weight-type {
+    font-size: var(--md-label-small);
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: var(--md-shape-corner-full);
+}
+
+.weight-type.benefit {
+    background: var(--md-success-container);
+    color: var(--md-on-success-container);
+}
+
+.weight-type.cost {
+    background: var(--md-error-container);
+    color: var(--md-on-error-container);
+}
+
+/* Comparison Page */
+.selector-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--md-spacing-md);
+}
+
+@media (min-width: 640px) {
+    .selector-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .selector-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.selected-phones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--md-spacing-sm);
+    margin-top: var(--md-spacing-md);
+}
+
+/* Ranking Results */
+.ranking-section {
+    margin-bottom: var(--md-spacing-lg);
+}
+
+/* TOPSIS Steps */
+.topsis-step {
+    margin-bottom: var(--md-spacing-md);
+}
+
+.topsis-step-header {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.topsis-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border-radius: var(--md-shape-corner-full);
+    font-weight: 700;
+    font-size: var(--md-label-large);
+}
+
+.topsis-step-title {
+    font-weight: 600;
+    font-size: var(--md-title-medium);
+    color: var(--md-on-surface);
+}
+
+.topsis-step-description {
+    font-size: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+    margin-bottom: var(--md-spacing-md);
+}
+
+/* Ideal Solutions Display */
+.ideal-solutions {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--md-spacing-md);
+}
+
+@media (min-width: 768px) {
+    .ideal-solutions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.ideal-solution {
+    padding: var(--md-spacing-md);
+    border-radius: var(--md-shape-corner-large);
+}
+
+.ideal-positive {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--md-success), transparent 90%), color-mix(in srgb, var(--md-success), transparent 95%));
+    border: 1px solid color-mix(in srgb, var(--md-success), transparent 70%);
+}
+
+.ideal-negative {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--md-error), transparent 90%), color-mix(in srgb, var(--md-error), transparent 95%));
+    border: 1px solid color-mix(in srgb, var(--md-error), transparent 70%);
+}
+
+.ideal-title {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-sm);
+    font-weight: 700;
+    margin-bottom: var(--md-spacing-md);
+}
+
+.ideal-positive .ideal-title {
+    color: var(--md-success);
+}
+
+.ideal-negative .ideal-title {
+    color: var(--md-error);
+}
+
+.ideal-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--md-spacing-sm);
+    background: color-mix(in srgb, var(--md-surface), transparent 50%);
+    border-radius: var(--md-shape-corner-small);
+    margin-bottom: var(--md-spacing-xs);
+    font-size: var(--md-body-small);
+}
+
+.ideal-item-value {
+    font-family: monospace;
+    font-weight: 700;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--md-spacing-3xl) var(--md-spacing-md);
+}
+
+.empty-state-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.empty-state-icon::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: var(--md-primary-container);
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.5;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.empty-state-icon i {
+    position: relative;
+    font-size: 80px;
+    color: var(--md-primary);
+    opacity: 0.5;
+}
+
+.empty-state-title {
+    font-size: var(--md-title-large);
+    font-weight: 600;
+    color: var(--md-on-surface-variant);
+    margin-top: var(--md-spacing-lg);
+}
+
+.empty-state-text {
+    font-size: var(--md-body-medium);
+    color: var(--md-on-surface-variant);
+    opacity: 0.6;
+    margin-top: var(--md-spacing-sm);
+}
+
+/* Print Styles */
+@media print {
+
+    .navbar,
+    .footer,
+    .btn {
+        display: none !important;
+    }
+
+    .card {
+        break-inside: avoid;
+    }
+}

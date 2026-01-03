@@ -253,8 +253,8 @@ function updateStats() {
 }
 
 // View phone detail
-function viewPhoneDetail(alternatif) {
-  const phone = smartphoneData.find(p => p.alternatif === alternatif);
+function viewPhoneDetail(id) {
+  const phone = smartphoneData.find(p => p.id === id);
   if (!phone) return;
 
   // Use modal component
@@ -264,12 +264,12 @@ function viewPhoneDetail(alternatif) {
 }
 
 // Add to comparison
-async function addToComparison(alternatif) {
-  const phone = smartphoneData.find(p => p.alternatif === alternatif);
+async function addToComparison(id) {
+  const phone = smartphoneData.find(p => p.id === id);
   if (!phone) return;
 
   // Check if already in comparison
-  if (comparisonList.find(p => p.alternatif === alternatif)) {
+  if (comparisonList.find(p => p.id === id)) {
     if (typeof ModalComponent !== 'undefined') {
       ModalComponent.alert('Smartphone ini sudah ada di daftar perbandingan!', {
         title: 'Info',

@@ -207,7 +207,7 @@ const ModalComponent = {
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn-filled" onclick="addToComparison('${phone.alternatif}'); ModalComponent.close();">
+        <button class="btn btn-filled" onclick="addToComparison(${phone.id}); ModalComponent.close();">
           <i class="fas fa-plus"></i>
           Tambah ke Perbandingan
         </button>

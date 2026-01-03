@@ -202,6 +202,7 @@ class TOPSISCalculator {
       const dMinus = Math.sqrt(distanceNegative);
 
       distances[i] = {
+        id: this.phones[i].id,
         alternatif: this.phones[i].alternatif,
         nama: this.phones[i].nama,
         dPlus: isNaN(dPlus) ? 0 : dPlus,
@@ -250,6 +251,7 @@ class TOPSISCalculator {
       score = Math.max(0, Math.min(1, score));
 
       scores.push({
+        id: this.phones[i].id,
         alternatif: alternatif,
         nama: nama,
         dPlus: normalizeDecimal(dPlus, 6),

@@ -155,10 +155,10 @@ function renderPhoneCard(phone) {
 
         <!-- Actions -->
         <div class="card-actions justify-between mt-4 pt-3 border-t border-base-content/5">
-          <button class="btn btn-ghost btn-sm gap-1 hover:text-primary" onclick="viewPhoneDetail('${phone.alternatif}')">
+          <button class="btn btn-ghost btn-sm gap-1 hover:text-primary" onclick="viewPhoneDetail(${phone.id})">
             <i class="fas fa-eye"></i> Detail
           </button>
-          <button class="btn btn-primary btn-sm gap-1" onclick="addToComparison('${phone.alternatif}')">
+          <button class="btn btn-primary btn-sm gap-1" onclick="addToComparison(${phone.id})">
             <i class="fas fa-plus"></i> Bandingkan
           </button>
         </div>
@@ -272,7 +272,7 @@ function renderPhoneDetailModal(phone) {
         </div>
 
         <div class="modal-action">
-          <button class="btn btn-primary gap-2" onclick="addToComparison('${phone.alternatif}')">
+          <button class="btn btn-primary gap-2" onclick="addToComparison(${phone.id})">
             <i class="fas fa-plus"></i> Tambah ke Perbandingan
           </button>
           <form method="dialog">
@@ -548,7 +548,7 @@ function renderRankingResults(results) {
         </thead>
         <tbody>
           ${results.ranking.map((item, index) => {
-    const phone = smartphoneData.find(p => p.alternatif === item.alternatif);
+    const phone = smartphoneData.find(p => p.id === item.id);
     const medalIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
     const rowClass = index === 0 ? 'bg-gradient-to-r from-warning/10 to-transparent' :
       index === 1 ? 'bg-gradient-to-r from-base-content/5 to-transparent' :
@@ -573,7 +573,7 @@ function renderRankingResults(results) {
                   </div>
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-ghost gap-1" onclick="viewPhoneDetail('${item.alternatif}')">
+                  <button class="btn btn-sm btn-ghost gap-1" onclick="viewPhoneDetail(${item.id})">
                     <i class="fas fa-eye"></i> Detail
                   </button>
                 </td>

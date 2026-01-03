@@ -99,10 +99,10 @@ const PhoneCardComponent = {
 
           <!-- Actions -->
           <div class="card-actions justify-between">
-            <button class="btn btn-ghost btn-sm" onclick="viewPhoneDetail('${phone.alternatif}')">
+            <button class="btn btn-ghost btn-sm" onclick="viewPhoneDetail(${phone.id})">
               <i class="fas fa-eye"></i> Detail
             </button>
-            <button class="btn btn-filled btn-sm" onclick="addToComparison('${phone.alternatif}')">
+            <button class="btn btn-filled btn-sm" onclick="addToComparison(${phone.id})">
               <i class="fas fa-plus"></i> Bandingkan
             </button>
           </div>

@@ -183,6 +183,14 @@
     color: var(--md-on-error-container);
 }
 
+.weight-description {
+    font-size: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+    margin: var(--md-spacing-xs) 0 var(--md-spacing-sm) 0;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
 /* Comparison Page */
 .selector-grid {
     display: grid;

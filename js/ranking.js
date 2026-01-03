@@ -38,6 +38,18 @@ function renderWeightInputsM3(weights) {
     charging: 'fa-bolt'
   };
 
+  // Deskripsi untuk setiap kriteria
+  const descriptions = {
+    harga: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan harga murah.',
+    ram: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan RAM besar untuk multitasking.',
+    memori: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan penyimpanan internal besar.',
+    kamera: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan resolusi kamera tinggi.',
+    baterai: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan kapasitas baterai besar.',
+    cpuGhz: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan kecepatan prosesor tinggi.',
+    nanometer: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan prosesor hemat daya (nm kecil).',
+    charging: 'Semakin tinggi bobot, semakin diprioritaskan smartphone dengan pengisian daya cepat.'
+  };
+
   let html = '<div class="weight-grid">';
   let totalWeight = 0;
 
@@ -56,6 +68,7 @@ function renderWeightInputsM3(weights) {
           <span class="weight-value" id="weight-display-${key}">${(weight * 100).toFixed(0)}%</span>
         </div>
         <span class="weight-type ${criteriaInfo.type}">${criteriaInfo.type}</span>
+        <p class="weight-description">${descriptions[key]}</p>
         <input type="range" id="weight-${key}" class="range mt-sm" 
                min="0" max="100" value="${(weight * 100).toFixed(0)}"
                onchange="updateWeightDisplay('${key}'); updateTotalWeight();" 
@@ -186,6 +199,17 @@ function runTOPSIS() {
     </div>
   `;
 
+  // Switch to ranking tab IMMEDIATELY so user sees loading
+  if (typeof showTab === 'function') {
+    showTab('ranking');
+  }
+
+  // Scroll to results section
+  const contentRanking = document.getElementById('content-ranking');
+  if (contentRanking) {
+    contentRanking.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // Run calculation with small delay for smooth UX
   setTimeout(() => {
     // Create calculator instance
@@ -196,9 +220,6 @@ function runTOPSIS() {
 
     // Display results
     displayResults(results);
-
-    // Switch to ranking tab
-    showTab('ranking');
   }, 300);
 }
 

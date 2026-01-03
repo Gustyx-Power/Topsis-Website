@@ -1,7 +1,42 @@
 /* ============================================
-   ALERT COMPONENTS
+   MISC UTILITIES & COMPONENTS
    Material Design 3 Style
    ============================================ */
+
+/* Text Utilities */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-sm {
+    margin-bottom: var(--md-spacing-sm);
+}
+
+.mb-md {
+    margin-bottom: var(--md-spacing-md);
+}
+
+.mt-xs {
+    margin-top: var(--md-spacing-xs);
+}
+
+.mt-sm {
+    margin-top: var(--md-spacing-sm);
+}
+
+.mt-md {
+    margin-top: var(--md-spacing-md);
+}
+
+/* Alert Components */
 
 /* Base Alert */
 .alert {

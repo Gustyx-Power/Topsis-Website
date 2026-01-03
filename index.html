@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smartphone TOPSIS - Sistem Pendukung Keputusan</title>
-  <meta name="description" content="Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode TOPSIS dengan analisis multi-kriteria">
+  <meta name="description"
+    content="Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode TOPSIS dengan analisis multi-kriteria">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -27,34 +28,304 @@
       <div class="hero-blob hero-blob-3"></div>
     </div>
 
-    <div class="hero-content">
-      <div class="hero-icon">📱</div>
-      <h1 class="hero-title">Smartphone Recommendation</h1>
-      <p class="hero-subtitle">
-        Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode
-        <span class="hero-highlight">TOPSIS</span>
-      </p>
+    <div class="hero-grid container">
+      <!-- Left Column: Mockup -->
+      <div class="hero-visual">
+        <div class="device-mockup large" style="margin-bottom: 0;">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <div class="device-wallpaper pixel-style"></div>
 
-      <div class="hero-badges">
-        <span class="hero-badge hero-badge-outline">
-          <i class="fas fa-mobile-alt"></i> 75 Smartphone
-        </span>
-        <span class="hero-badge hero-badge-low-end">
-          <i class="fas fa-coins"></i> Low-End
-        </span>
-        <span class="hero-badge hero-badge-mid-range">
-          <i class="fas fa-star"></i> Mid-Range
-        </span>
-        <span class="hero-badge hero-badge-flagship">
-          <i class="fas fa-crown"></i> Flagship
-        </span>
+            <div class="device-status-bar">
+              <span class="device-time">12:30</span>
+              <div class="device-icons">
+                <i class="fas fa-signal" style="font-size: 10px;"></i>
+                <span class="network-5g">5G</span>
+                <div class="ios-battery">
+                  <span class="battery-level">100</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="device-home">
+              <!-- Weather Widget -->
+              <div class="device-widget-weather">
+                <div class="weather-icon"><i class="fas fa-sun" style="color: #FDB813;"></i></div>
+                <div class="weather-info">
+                  <div class="weather-temp">28°C</div>
+                  <div class="weather-loc">Jakarta</div>
+                </div>
+              </div>
+
+              <!-- Google Search Bar -->
+              <div class="device-widget-search">
+                <i class="fab fa-google" style="color: #4285F4;"></i>
+                <i class="fas fa-microphone" style="color: #333;"></i>
+              </div>
+
+              <!-- App Grid -->
+              <div class="device-app-grid">
+                <div class="device-app-icon pixel-icon"><i class="fas fa-envelope" style="color:#EA4335;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fab fa-instagram" style="color:#C13584;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fab fa-twitter" style="color:#1DA1F2;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fab fa-youtube" style="color:#FF0000;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fab fa-spotify" style="color:#1DB954;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fas fa-map-marker-alt" style="color:#34A853;"></i>
+                </div>
+                <div class="device-app-icon pixel-icon"><i class="fas fa-clock" style="color:#1a73e8;"></i></div>
+                <div class="device-app-icon pixel-icon"><i class="fas fa-cog" style="color:#5f6368;"></i></div>
+              </div>
+
+              <!-- Dock -->
+              <div class="device-dock pixel-dock">
+                <div class="device-app-icon"><i class="fas fa-phone-alt" style="color:#1B66C9;"></i></div>
+                <div class="device-app-icon"><i class="fas fa-comment-dots" style="color:#1B66C9;"></i></div>
+                <div class="device-app-icon"><i class="fab fa-chrome" style="color:#FBBC05;"></i></div>
+                <div class="device-app-icon"><i class="fas fa-camera" style="color:#333;"></i></div>
+              </div>
+            </div>
+
+            <!-- SYSTEM LEVEL OVERLAYS (Direct children of device-screen for correct z-index layering) -->
+
+            <!-- 1. Lockscreen Overlay -->
+            <div class="device-screen-overlay device-lockscreen">
+              <div class="lock-clock">12:30</div>
+              <div class="lock-date">Saturday, Jan 3</div>
+
+              <div class="lock-notification">
+                <i class="fab fa-whatsapp"></i>
+                <div class="lock-notif-content">
+                  <span>WhatsApp</span>
+                  <p>Group: Project Topsis Deadline 🔥</p>
+                </div>
+              </div>
+
+              <div class="lock-shortcuts">
+                <div class="lock-shortcut"><i class="fas fa-home"></i></div>
+                <div class="lock-shortcut"><i class="fas fa-camera"></i></div>
+              </div>
+
+              <div class="lock-hint">
+                <i class="fas fa-chevron-up"></i>
+                <span>Swipe up to unlock</span>
+              </div>
+            </div>
+
+            <!-- 2. PIN Unlock Screen -->
+            <div class="device-screen-overlay device-pin-screen">
+              <div class="pin-instruction">Enter PIN</div>
+              <div class="pin-dots">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+              </div>
+              <div class="pin-keypad">
+                <div class="pin-key" data-key="1">1</div>
+                <div class="pin-key" data-key="2">2</div>
+                <div class="pin-key" data-key="3">3</div>
+                <div class="pin-key" data-key="4">4</div>
+                <div class="pin-key" data-key="5">5</div>
+                <div class="pin-key" data-key="6">6</div>
+                <div class="pin-key" data-key="7">7</div>
+                <div class="pin-key" data-key="8">8</div>
+                <div class="pin-key" data-key="9">9</div>
+                <div class="pin-key" data-key=""></div>
+                <div class="pin-key" data-key="0">0</div>
+                <div class="pin-key" data-key="ok"><i class="fas fa-arrow-right"></i></div>
+              </div>
+            </div>
+
+            <!-- 3. Weather App View -->
+            <div class="device-screen-overlay device-app-weather-view">
+              <button class="app-back-btn"><i class="fas fa-chevron-left"></i></button>
+
+              <div class="weather-detail">
+                <div class="weather-city">Jakarta</div>
+                <div class="weather-date">Sat, Jan 3</div>
+                <div class="weather-main-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+                <div class="weather-temp-large">28°</div>
+                <div class="weather-desc">Light Rain</div>
+                <div class="weather-hl">H: 31° L: 24°</div>
+              </div>
+
+              <div class="weather-forecast">
+                <div class="forecast-item">
+                  <span class="day">Now</span>
+                  <i class="fas fa-cloud-showers-heavy"></i>
+                  <span class="temp">28°</span>
+                </div>
+                <div class="forecast-item">
+                  <span class="day">1 PM</span>
+                  <i class="fas fa-cloud-sun"></i>
+                  <span class="temp">29°</span>
+                </div>
+                <div class="forecast-item">
+                  <span class="day">2 PM</span>
+                  <i class="fas fa-sun"></i>
+                  <span class="temp">30°</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Settings App View -->
+            <div class="device-screen-overlay device-app-settings-view">
+              <div class="settings-header">
+                <i class="fas fa-search"></i>
+                <span>Settings</span>
+                <div class="settings-profile-pic">G</div>
+              </div>
+              <div class="settings-list">
+                <div class="settings-item active">
+                  <i class="fas fa-wifi"
+                    style="background: #E8F0FE; color: #1A73E8; padding: 8px; border-radius: 50%;"></i>
+                  <div class="settings-text">
+                    <span>Network & internet</span>
+                    <small>Wi-Fi, Mobile, Data usage</small>
+                  </div>
+                </div>
+                <div class="settings-item">
+                  <i class="fas fa-stopwatch"
+                    style="background: #E6F4EA; color: #1E8E3E; padding: 8px; border-radius: 50%;"></i>
+                  <div class="settings-text">
+                    <span>Battery</span>
+                    <small>100% - Fully charged</small>
+                  </div>
+                </div>
+                <div class="settings-item">
+                  <i class="fas fa-mobile-alt"
+                    style="background: #FCE8E6; color: #D93025; padding: 8px; border-radius: 50%;"></i>
+                  <div class="settings-text">
+                    <span>Display</span>
+                    <small>Dark theme, Font size</small>
+                  </div>
+                </div>
+                <div class="settings-item">
+                  <i class="fas fa-info-circle"
+                    style="background: #FEF7E0; color: #F9AB00; padding: 8px; border-radius: 50%;"></i>
+                  <div class="settings-text">
+                    <span>About phone</span>
+                    <small>Pixel 9 Pro XL</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Search Overlay -->
+            <div class="device-screen-overlay device-search-overlay">
+              <div class="search-overlay-bar">
+                <i class="fab fa-google"></i>
+                <span>best smartphones 2025|</span>
+                <i class="fas fa-microphone"></i>
+              </div>
+              <div class="search-keyboard">
+                <div class="keyboard-row">
+                  <div class="key">q</div>
+                  <div class="key">w</div>
+                  <div class="key">e</div>
+                  <div class="key">r</div>
+                  <div class="key">t</div>
+                  <div class="key">y</div>
+                  <div class="key">u</div>
+                  <div class="key">i</div>
+                  <div class="key">o</div>
+                  <div class="key">p</div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key">a</div>
+                  <div class="key">s</div>
+                  <div class="key">d</div>
+                  <div class="key">f</div>
+                  <div class="key">g</div>
+                  <div class="key">h</div>
+                  <div class="key">j</div>
+                  <div class="key">k</div>
+                  <div class="key">l</div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key caps"><i class="fas fa-arrow-up"></i></div>
+                  <div class="key">z</div>
+                  <div class="key">x</div>
+                  <div class="key">c</div>
+                  <div class="key">v</div>
+                  <div class="key">b</div>
+                  <div class="key">n</div>
+                  <div class="key">m</div>
+                  <div class="key backspace"><i class="fas fa-backspace"></i></div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key num">?123</div>
+                  <div class="key space"></div>
+                  <div class="key enter"><i class="fas fa-search"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SYSTEM LEVEL OVERLAYS (Outside device-home to cover status bar) -->
+
+            <!-- Boot Screen -->
+            <div class="device-boot-screen">
+              <div class="boot-logo">
+                <div class="phone-logo large">
+                  <div class="phone-logo-screen">
+                    <div class="phone-logo-camera"></div>
+                    <div class="phone-logo-content">T</div>
+                  </div>
+                </div>
+              </div>
+              <div class="boot-loader"></div>
+            </div>
+
+            <!-- Power Menu -->
+            <div class="device-power-menu">
+              <div class="power-items">
+                <div class="power-btn emergency">
+                  <i class="fas fa-first-aid"></i>
+                  <span>Emergency</span>
+                </div>
+                <div class="power-btn power-off">
+                  <i class="fas fa-power-off"></i>
+                  <span>Power Off</span>
+                </div>
+                <div class="power-btn restart active">
+                  <i class="fas fa-redo"></i>
+                  <span>Restart</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="hero-cta">
-        <a href="ranking.html" class="btn btn-filled btn-lg">
-          <i class="fas fa-chart-line"></i>
-          Mulai Analisis TOPSIS
-        </a>
+      <!-- Right Column: Text Content -->
+      <div class="hero-text">
+        <h1 class="hero-title">Smartphone Recommendation</h1>
+        <p class="hero-subtitle">
+          Sistem Pendukung Keputusan Pemilihan Smartphone menggunakan Metode
+          <span class="hero-highlight">TOPSIS</span>
+        </p>
+
+        <div class="hero-badges">
+          <span class="hero-badge hero-badge-outline">
+            <i class="fas fa-mobile-alt"></i> 75 Smartphone
+          </span>
+          <span class="hero-badge hero-badge-low-end">
+            <i class="fas fa-coins"></i> Low-End
+          </span>
+          <span class="hero-badge hero-badge-mid-range">
+            <i class="fas fa-star"></i> Mid-Range
+          </span>
+          <span class="hero-badge hero-badge-flagship">
+            <i class="fas fa-crown"></i> Flagship
+          </span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="ranking.html" class="btn btn-filled btn-lg">
+            <i class="fas fa-chart-line"></i>
+            Mulai Analisis TOPSIS
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -93,8 +364,8 @@
                   <i class="fas fa-search"></i> Cari Model
                 </span>
               </label>
-              <input type="text" id="searchInput" placeholder="Cari nama smartphone..."
-                class="input" onkeyup="applyFilters()">
+              <input type="text" id="searchInput" placeholder="Cari nama smartphone..." class="input"
+                onkeyup="applyFilters()">
             </div>
 
             <!-- Sort -->

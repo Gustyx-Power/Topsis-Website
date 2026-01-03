@@ -11,8 +11,10 @@
     justify-content: center;
     overflow: hidden;
     padding: var(--md-spacing-2xl) var(--md-spacing-md);
+    text-align: left;
 }
 
+/* Background Blobs (Restored) */
 .hero-background {
     position: absolute;
     inset: 0;
@@ -56,18 +58,41 @@
     opacity: 0.3;
 }
 
-.hero-content {
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--md-spacing-xl);
+    align-items: center;
     position: relative;
     z-index: 1;
-    text-align: center;
-    max-width: 800px;
 }
 
-.hero-icon {
-    font-size: 64px;
-    margin-bottom: var(--md-spacing-md);
-    animation: bounce 2s ease-in-out infinite;
+@media (min-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr 1.5fr;
+        /* Visual Left, Text Right */
+        gap: var(--md-spacing-3xl);
+    }
 }
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.hero-text {
+    max-width: 100%;
+}
+
+
+.hero-icon-wrapper {
+    margin-bottom: var(--md-spacing-lg);
+    animation: float 6s ease-in-out infinite;
+    display: inline-block;
+}
+
+/* Remove old hero-icon styles */
 
 .hero-title {
     font-family: var(--md-font-family-brand);
@@ -97,7 +122,8 @@
 .hero-badges {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Align left */
     gap: var(--md-spacing-sm);
     margin-bottom: var(--md-spacing-xl);
 }

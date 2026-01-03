@@ -174,7 +174,7 @@
 }
 
 /* FAB (Floating Action Button) */
-.fab {
+.btn-fab {
     position: fixed;
     bottom: 24px;
     right: 24px;
@@ -189,23 +189,23 @@
     z-index: var(--md-z-index-fixed);
 }
 
-.fab:hover {
+.btn-fab:hover {
     box-shadow: var(--md-elevation-level4);
     background: color-mix(in srgb, var(--md-primary-container), var(--md-on-primary-container) 8%);
 }
 
-.fab i {
+.btn-fab i {
     font-size: 24px;
 }
 
 /* Extended FAB */
-.fab-extended {
+.btn-fab-extended {
     width: auto;
     padding: 16px 20px;
     border-radius: var(--md-shape-corner-large);
 }
 
-.fab-extended i {
+.btn-fab-extended i {
     font-size: 20px;
 }
 

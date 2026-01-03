@@ -4,34 +4,34 @@
 // ============================================
 
 const PhoneCardComponent = {
-    // Category configuration
-    categoryConfig: {
-        'Low-End': {
-            badge: 'badge-low-end',
-            icon: 'fa-coins',
-            gradient: 'from-amber-500 to-orange-500'
-        },
-        'Mid-Range': {
-            badge: 'badge-mid-range',
-            icon: 'fa-star',
-            gradient: 'from-purple-500 to-violet-500'
-        },
-        'Flagship': {
-            badge: 'badge-flagship',
-            icon: 'fa-crown',
-            gradient: 'from-yellow-500 to-amber-500'
-        }
+  // Category configuration
+  categoryConfig: {
+    'Low-End': {
+      badge: 'badge-low-end',
+      icon: 'fa-coins',
+      gradient: 'from-amber-500 to-orange-500'
     },
+    'Mid-Range': {
+      badge: 'badge-mid-range',
+      icon: 'fa-star',
+      gradient: 'from-purple-500 to-violet-500'
+    },
+    'Flagship': {
+      badge: 'badge-flagship',
+      icon: 'fa-crown',
+      gradient: 'from-yellow-500 to-amber-500'
+    }
+  },
 
-    // Render phone card
-    render(phone) {
-        const config = this.categoryConfig[phone.kategori] || {
-            badge: 'badge-outlined',
-            icon: 'fa-mobile',
-            gradient: 'from-gray-500 to-slate-500'
-        };
+  // Render phone card
+  render(phone) {
+    const config = this.categoryConfig[phone.kategori] || {
+      badge: 'badge-outlined',
+      icon: 'fa-mobile',
+      gradient: 'from-gray-500 to-slate-500'
+    };
 
-        return `
+    return `
       <div class="card card-elevated phone-card" data-animate="slide-up">
         <div class="card-body">
           <!-- Header -->
@@ -109,33 +109,33 @@ const PhoneCardComponent = {
         </div>
       </div>
     `;
-    },
+  },
 
-    // Render grid of phone cards
-    renderGrid(phones, containerId = 'phoneGrid') {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+  // Render grid of phone cards
+  renderGrid(phones, containerId = 'phoneGrid') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-        if (phones.length === 0) {
-            container.innerHTML = '';
-            return;
-        }
-
-        container.innerHTML = phones.map(phone => this.render(phone)).join('');
-
-        // Re-initialize scroll animations
-        if (typeof AnimationManager !== 'undefined') {
-            AnimationManager.refreshScrollAnimations();
-        }
+    if (phones.length === 0) {
+      container.innerHTML = '';
+      return;
     }
+
+    container.innerHTML = phones.map(phone => this.render(phone)).join('');
+
+    // Re-initialize scroll animations
+    if (typeof AnimationManager !== 'undefined') {
+      AnimationManager.refreshScrollAnimations();
+    }
+  }
 };
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PhoneCardComponent;
+  module.exports = PhoneCardComponent;
 }
 
 // Global render function for backward compatibility
 function renderPhoneCard(phone) {
-    return PhoneCardComponent.render(phone);
+  return PhoneCardComponent.render(phone);
 }

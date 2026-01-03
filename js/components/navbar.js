@@ -4,15 +4,20 @@
 // ============================================
 
 const NavbarComponent = {
-    render(containerId = 'navbar') {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+  render(containerId = 'navbar') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-        container.innerHTML = `
+    container.innerHTML = `
       <nav class="navbar">
         <div class="navbar-container container">
           <a href="index.html" class="navbar-brand">
-            <span class="navbar-brand-icon">📱</span>
+            <div class="phone-logo">
+              <div class="phone-logo-screen">
+                <div class="phone-logo-camera"></div>
+                <div class="phone-logo-content">T</div>
+              </div>
+            </div>
             <span class="navbar-brand-text">Smartphone TOPSIS</span>
           </a>
 
@@ -40,23 +45,23 @@ const NavbarComponent = {
         </div>
       </nav>
     `;
-    },
+  },
 
-    isActivePage(pageName) {
-        const currentPath = window.location.pathname;
-        if (pageName === 'index') {
-            return currentPath.endsWith('index.html') || currentPath.endsWith('/');
-        }
-        return currentPath.includes(pageName);
+  isActivePage(pageName) {
+    const currentPath = window.location.pathname;
+    if (pageName === 'index') {
+      return currentPath.endsWith('index.html') || currentPath.endsWith('/');
     }
+    return currentPath.includes(pageName);
+  }
 };
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = NavbarComponent;
+  module.exports = NavbarComponent;
 }
 
 // Global render function for backward compatibility
 function renderNavbar() {
-    NavbarComponent.render();
+  NavbarComponent.render();
 }

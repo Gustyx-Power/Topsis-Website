@@ -4,15 +4,20 @@
 // ============================================
 
 const FooterComponent = {
-    render(containerId = 'footer') {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+  render(containerId = 'footer') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-        container.innerHTML = `
+    container.innerHTML = `
       <footer class="footer footer-accent">
         <div class="footer-container">
           <div class="footer-brand">
-            <span class="footer-brand-icon">📱</span>
+            <div class="phone-logo">
+              <div class="phone-logo-screen">
+                <div class="phone-logo-camera"></div>
+                <div class="phone-logo-content">T</div>
+              </div>
+            </div>
             <span class="footer-brand-text">Smartphone TOPSIS</span>
           </div>
 
@@ -39,20 +44,20 @@ const FooterComponent = {
           <div class="footer-divider"></div>
 
           <p class="footer-copyright">
-            © 2025 Sistem Pendukung Keputusan | Low-End • Mid-Range • Flagship
+            © 2025 Sistem Pendukung Keputusan | Kelompok 2 | Universitas Pelita Bangsa
           </p>
         </div>
       </footer>
     `;
-    }
+  }
 };
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = FooterComponent;
+  module.exports = FooterComponent;
 }
 
 // Global render function for backward compatibility
 function renderFooter() {
-    FooterComponent.render();
+  FooterComponent.render();
 }
